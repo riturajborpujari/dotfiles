@@ -1,0 +1,13 @@
+export FZF_DEFAULT_OPTS="--preview='preview.sh {}' \
+  --border-label='Finder' \
+  --border=rounded \
+  --border-label-pos=4 \
+  --padding=1 \
+  --info=hidden \
+  --preview-label='Preview' \
+  --preview-label-pos=4 \
+  --bind ctrl-u:preview-down,ctrl-i:preview-up"
+export FZF_DEFAULT_COMMAND="fd"
+
+alias fcd='cd $(fd -td | fzf)'
+alias fvim="vim \$(fd -tf | fzf)"
