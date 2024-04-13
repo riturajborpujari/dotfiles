@@ -19,7 +19,7 @@ set laststatus=2
 set statusline=\ %f\ %=%m\ %y\ %l:%c\ 
 filetype plugin indent on
 syntax on
-colorscheme slate-mod
+colorscheme soaring-skies
 
 " ALE config
 let g:ale_fixers = {
