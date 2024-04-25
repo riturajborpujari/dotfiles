@@ -15,3 +15,9 @@ alias ls="ls --color"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 EDITOR=vim
+
+# Journal file
+export JOURNAL_DATA_FILE=/var/journal/journal.log
+
+#Screenshot dir
+export HYPRSHOT_DIR=~/screenshots
