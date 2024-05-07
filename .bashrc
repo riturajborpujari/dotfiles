@@ -21,3 +21,9 @@ export JOURNAL_DATA_FILE=/var/journal/journal.log
 
 #Screenshot dir
 export HYPRSHOT_DIR=~/screenshots
+
+# Directory marking
+alias dmk="pwd >> ~/.dmks"
+alias cdmk="cd \$(cat ~/.dmks | fzf)"
+
+. "$HOME/.cargo/env"
