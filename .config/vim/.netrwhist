@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/rituraj/stash/practice__web/test.html'
+let g:netrw_dirhist_3='/home/rituraj/.config/nvim/lua/config/plugins'
+let g:netrw_dirhist_2='/home/rituraj/.config/nvim/lua/config'
+let g:netrw_dirhist_1='/home/rituraj/go/pkg/mod/gopl.io@v0.0.0-20211004154805-1ae3ec64947b/ch2/tempconv'
+let g:netrw_dirhist_0='/'
+let g:netrw_dirhist_9='/usr'
+let g:netrw_dirhist_8='/usr/include'
+let g:netrw_dirhist_7='/usr/include/linux'
+let g:netrw_dirhist_6='/home/rituraj/.config/vim'
+let g:netrw_dirhist_5='/home/rituraj/stash/practice__c_basics'

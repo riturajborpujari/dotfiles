@@ -1,0 +1,120 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    (workspace)
+    (label :text "" :style "color: #aaaaaa")
+    (sidestuff)))
+
+(defwidget workspace []
+  (box :orientation "h" :spacing 20 :halign "start" :space-evenly "false"
+    (label :style "color: #5fafff" :class "border-right" :text {activeWorkspaceId} :halign "start")
+    (label :style "color: #aaaaaa" :text {activeWindow} :halign "start")))
+
+(defwidget sidestuff []
+  (box
+    :class "sidestuff" 
+    :orientation "h" 
+    :space-evenly false
+    :halign "end" 
+    :valign "center"
+    :spacing 10
+
+    (systray :orientation "h" :spacing 10 :icon-size 16)
+    (label 
+      :class "border-right"
+      :style "color: #f7768e"
+      :text "GPU: ${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C")
+    (label 
+      :class "border-right"
+      :style "color: #9ece6a"
+      :text "PCI: ${round(EWW_TEMPS.GIGABYTE_WMI_TEMP2,1)}°C")
+    (label 
+      :class "border-right"
+      :style "color: #ff9e64"
+      :text "CPU: ${round(EWW_CPU.avg,1)}% | ${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C")
+    (label 
+      :class "border-right"
+      :style "color: #1abc9c" 
+      :text "RAM: ${round(EWW_RAM.used_mem / 1073741824,1)} GB")
+    (label :text {formattime(EWW_TIME,"%d %b, %y | %H:%M")} :style "color: #aaaaaa")))
+
+(defvar activeWorkspaceId "1")
+(defvar activeWindow " ")
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" (label :markup label))
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defwidget systeminfo []
+  (box
+    :width 200
+    :height 50
+    :valign "start"
+    :halign "start"
+    :space-evenly false
+    :orientation "h"
+    :class "panel"
+    :spacing 10
+    (box :orientation "vertical" :spacing 5 :valign "start"
+      (label :text "Temperatures" :style "color: #ffaa22" :halign "start")
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "cpu")
+        (label :halign "end" :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)} C"))
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "gpu")
+        (label :halign "end" :text "${round(EWW_TEMPS.AMDGPU_JUNCTION, 0)} C"))
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "ssd")
+        (label :halign "end" :text "${round(EWW_TEMPS.NVME_SENSOR_1_CT500P3SSD8_TEMP2, 0)} C"))
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "board")
+        (label :halign "end" :text "${round(EWW_TEMPS.GIGABYTE_WMI_TEMP2, 0)} C"))
+    )
+    (box :orientation "vertical" :spacing 5 :valign "start"
+      (label :text "Others" :style "color: #ffaa22" :halign "start")
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "vpn")
+        (label :halign "end" :text {vpnStatus != "stopped"? "Active": "Inactive"}))
+      (box :space-evenly true :orientation "horizontal" :class "chip grey"
+        (label :halign "start" :text "wlan0")
+        (label :halign "end" :text "${round(EWW_NET.wlan0.NET_DOWN, 0)} / ${round(EWW_NET.wlan0.NET_UP, 0)} B")))
+    (box :orientation "vertical" :spacing 5 
+      (label :text "CPU cores" :style "color: #ffaa22" :halign "start")
+      (box :space-evenly true :orientation "horizontal" :class "grey chip"
+        (label :halign "start" :text "avg")
+        (label :halign "end" :text "${round(EWW_CPU.avg, 2)} %"))
+      (for core in {EWW_CPU.cores} 
+        (box :space-evenly true :orientation "horizontal" :class "grey chip"
+          (label :halign "start" :text {core.core})
+          (label :halign "end" :text "${core.freq} Mhz - ${round(core.usage, 2)}%")))
+    )
+  ))
+
+(defpoll vpnStatus :interval "10s" "scripts/get-vpn-status")
+
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :geometry (geometry :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "10px"
+    :anchor "top center")
+  (bar))
+
+(defwindow systeminfo
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry
+    :anchor "top right"
+    :x 10
+    :y 10
+    :width 150
+    :height 200)
+  (systeminfo))

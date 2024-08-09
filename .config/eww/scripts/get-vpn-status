@@ -1,0 +1,2 @@
+#!/bin/sh
+systemctl status openvpn-client@o4s | stdbuf -o0 grep 'running' || echo 'stopped'
