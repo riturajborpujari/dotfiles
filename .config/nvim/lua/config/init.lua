@@ -13,17 +13,24 @@ vim.opt.softtabstop=2
 vim.opt.shiftwidth=2
 vim.opt.expandtab = true
 
+vim.opt.foldenable=true
+vim.opt.foldmethod="indent"
+vim.opt.foldlevel=99
+
+vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.config/vim/undodir"
+vim.opt.undodir = os.getenv("HOME") .. "/.local/state/nvim/undo"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-vim.opt.termguicolors = true
+vim.opt.path = vim.opt.path + "src/**,app/**"
+vim.opt.wildmenu = true
+vim.opt.wildoptions = "pum,fuzzy"
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "no"
@@ -35,4 +42,3 @@ vim.opt.colorcolumn = "80"
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
-

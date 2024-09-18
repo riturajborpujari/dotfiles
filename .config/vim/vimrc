@@ -1,13 +1,14 @@
 set runtimepath+=~/.config/vim/
 
+set encoding=utf-8
 set nocompatible
 set relativenumber
 set number
 set signcolumn=no
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 
 set foldenable
@@ -16,6 +17,7 @@ set foldlevel=100
 
 set colorcolumn=80
 set nowrap
+set textwidth=80
 set smartindent
 set autoindent
 
@@ -23,6 +25,7 @@ set nohls
 set incsearch
 set updatetime=50
 set undofile
+set undodir=~/.local/state/vim/undo
 
 syntax enable
 filetype plugin indent on
@@ -38,7 +41,6 @@ call plug#begin()
   Plug 'prabirshrestha/vim-lsp'
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  " Plug 'girishji/scope.vim'
 call plug#end()
 
 runtime lsp-config.vim
@@ -55,9 +57,21 @@ function! PrettierFormat(type)
   exec "'[,']!prettier --parser=typescript"
 endfunction
 
+function! ClangFormat(type)
+  exec "'[,']!clang-format"
+endfunction
+
 au Filetype javascript,typescript {
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+
   nmap <silent> gq :set opfunc=PrettierFormat<cr>g@
   vmap <leader>gp :!prettier --parser=typescript<cr>
+}
+
+au Filetype c,cpp {
+  nmap <silent> gq :set opfunc=ClangFormat<cr>g@
 }
 
 au Filetype markdown {

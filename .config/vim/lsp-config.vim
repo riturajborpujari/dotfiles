@@ -1,16 +1,8 @@
-if executable('jedi-language-server')
+if executable('pyright')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'jedi-language-server',
-        \ 'cmd': {server_info->['jedi-language-server']},
+        \ 'name': 'pyright',
+        \ 'cmd': {server_info->['pyright']},
         \ 'allowlist': ['python'],
-        \ })
-endif
-
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'allowlist': ['c', 'cpp', 'h', 'hpp'],
         \ })
 endif
 
@@ -22,19 +14,19 @@ if executable('tsserver')
         \ })
 endif
 
-if executable('rust-analyzer')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rust-analyzer',
-        \ 'cmd': {server_info->['rust-analyzer']},
-        \ 'allowlist': ['rust'],
-        \ })
-endif
-
 if executable('gopls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'gopls-server',
         \ 'cmd': {server_info->['gopls']},
         \ 'allowlist': ['go'],
+        \ })
+endif
+
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd-server',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'allowlist': ['c', 'h', 'cpp', 'hpp'],
         \ })
 endif
 

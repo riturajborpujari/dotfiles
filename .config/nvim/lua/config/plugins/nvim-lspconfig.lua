@@ -22,8 +22,7 @@ return {
       mapping = cmp.mapping.preset.insert({
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<cr>'] = cmp.mapping.confirm({ select = true, behavior = cmp.SelectBehavior.Replace }),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping.complete(),
         ['<Tab>'] = cmp.mapping(function (fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -39,6 +38,9 @@ return {
           end
         end, {'i', 's' })
       }),
+      completion = {
+        autocomplete = false
+      },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
       }, {

@@ -16,16 +16,13 @@ write_git_branch_colorized () {
 }
 
 export EDITOR=vim
-export PS1="\033[0;96m\$(date "+%H:%M") \033[0;94m\w\$(write_git_branch_colorized) \033[0m\n "
+export PS1="\033[0;33m\$(date "+%H:%M") \033[0;32m\w\$(write_git_branch_colorized) \033[0m\n "
 
 export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export PATH="$HOME/.cargo/bin:~/.local/bin:$PATH"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/.cargo/bin:$GOPATH/bin:$HOME/.local/bin"
 export JOURNAL_DATA_FILE=~/.local/.journal
 
 alias ls="ls --color"
@@ -49,4 +46,5 @@ alias gsc="git log --oneline | fzf | awk '{print \$1}'"
 alias gsb="git branch -l | fzf | awk '{print \$1}'"
 alias gc="git checkout \$(gsb)"
 
-export PAGER_VIM="vim -c 'silent write! /tmp/last_paged_content | terminal cat /tmp/last_paged_content' -c 'only' -"
+# export PAGER_VIM="vim -c 'silent write! /tmp/last_paged_content | terminal cat /tmp/last_paged_content' -c 'only' -"
+
