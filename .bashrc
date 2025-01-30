@@ -9,27 +9,26 @@ write_git_branch_colorized () {
   fi;
 
   if [[ $(git status -s 2> /dev/null) ]]; then
-    echo -e " \033[0;33m[$branch]*"
+    echo -e " \033[1m[$branch]*"
   else
-    echo -e " \033[0;33m[$branch]"
+    echo -e " \033[1m[$branch]"
   fi
 }
 
 export EDITOR=vim
-export PS1="\033[0;33m\$(date "+%H:%M") \033[0;32m\w\$(write_git_branch_colorized) \033[0m\n "
+export PS1="\033[0m\$(date "+%H:%M") \033[0;37m\w\$(write_git_branch_colorized) \033[0m\n "
 
 export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
 
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.go"
 export PATH="$PATH:$HOME/.cargo/bin:$GOPATH/bin:$HOME/.local/bin"
-export JOURNAL_DATA_FILE=~/.local/.journal
+export JOURNAL_DATA_FILE=~/.local/state/journal/data.journal
 
-alias ls="ls --color"
 alias bat="bat --theme=TwoDark --style=plain --pager=less"
 
-alias dmk="pwd >> ~/.local/.dmks"
-alias cdmk="cd \$(cat ~/.local/.dmks | fzf)"
+alias dmk="pwd >> ~/.local/state/dmk/marks.dmk"
+alias cdmk="cd \$(cat ~/.local/state/dmk/marks.dmk | fzf)"
 
 alias vpn-connect="systemctl start openvpn-client@o4s.service"
 alias vpn-disconnect="systemctl stop openvpn-client@o4s.service"
@@ -38,8 +37,6 @@ alias vpn-status="systemctl status openvpn-client@o4s.service"
 alias bt-connect="bluetoothctl connect \$(bluetoothctl devices | fzf | awk '{print \$2}')"
 
 alias grep="grep --exclude-dir dist --exclude-dir node_modules --exclude tags --color=always"
-
-alias shutup="sudo modprobe -r xhci_pci && systemctl poweroff"
 
 # Git aliases
 alias gsc="git log --oneline | fzf | awk '{print \$1}'"
