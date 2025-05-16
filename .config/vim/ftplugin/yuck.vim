@@ -1,0 +1,5 @@
+syntax match Function "(\w*"
+syntax match Type ":\w*"
+syntax match Type "true"
+syntax match Type "false"
+syntax match String "\".*\""

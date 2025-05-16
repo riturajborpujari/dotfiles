@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/rituraj/src/interviews/sprinto'
+let g:netrw_dirhist_5='/home/rituraj/src/personal/accio'
+let g:netrw_dirhist_4='/home/rituraj/src/personal'
+let g:netrw_dirhist_3='/home/rituraj/src/personal/accio'
+let g:netrw_dirhist_2='/home/rituraj/src/personal/ferry/queue'
+let g:netrw_dirhist_1='/home/rituraj/.config/vim'

@@ -1,0 +1,4 @@
+set recolor-darkcolor "#d0d0d0"
+set recolor-lightcolor "#262626"
+set recolor-keephue "true"
+set recolor "true"
