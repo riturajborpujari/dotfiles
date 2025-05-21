@@ -25,21 +25,21 @@ hi LineNr guifg=#e5c07b
 hi LineNrAbove ctermfg=240
 hi LineNrBelow ctermfg=240
 
-hi String guifg=#ff4f40
-hi Constant guifg=#f64f40
-hi Character guifg=#f64f40
-hi Number guifg=#f64f40
-hi Boolean guifg=#f64f40
-hi Float guifg=#f64f40
+hi String guifg=#e02c38
+hi! link Constant String
+hi! link Character String
+hi! link Number String
+hi! link Boolean String
+hi! link Float String
 
-hi Function guifg=#d0d080 ctermfg=NONE cterm=none
+hi Function guifg=#d0e080 ctermfg=NONE cterm=none
 
-hi Statement guifg=#FFD449
+hi Statement guifg=#44aaee
 hi Conditional guifg=#FFD449
 hi Repeat guifg=#FFD449
 hi Label guifg=#FFD449
 hi Operator guifg=#FFD449
-hi Keyword guifg=#FFD449
+hi Keyword guifg=#44aaee
 hi Exception guifg=#FFD449
 
 hi Identifier guifg=#d0d0d0 ctermfg=NONE cterm=none

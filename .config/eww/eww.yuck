@@ -10,8 +10,26 @@
     :spacing 10
     :halign "start"
     :space-evenly "false"
-    (label :class "bordered" :text {activeWorkspaceId} :halign "start")
-    (label :class "border-right" :text "${activeWindow}" :halign "start")))
+    (box
+        :orientation "h"
+        :halign "start"
+        :space-evenly "false"
+        :spacing 0
+        (for workspace in {hyprTrackerStats?.activeWorkspaces}
+            (label :class {hyprTrackerStats.currentWorkspace == workspace ?'bordered active':'bordered'}  :text {workspace} :halign "start")))
+    (label :class "border-right" :text "${hyprTrackerStats?.currentWindow?.title == "null" ? '': hyprTrackerStats.currentWindow.title}" :halign "start")))
+  
+
+(defwidget 
+    networkStatus []
+    (label
+        :style "background-color: rgba(0.2, 0.2, 0.2, 0.7); padding: 8px;
+        color: #d0d0d0; border: 1px solid #606060;"
+        :markup "<span color='#d0d080'>Network</span>
+Active  : ${ipStatus?.iface}
+Address : ${ipStatus?.ip}
+Gateway : ${ipStatus?.gateway}
+SSID    : ${wlan0Status?.ssid}"))
 
 (defwidget sidestuff []
   (box
@@ -23,11 +41,8 @@
     :spacing 10
     (systray :orientation "h" :spacing 10 :icon-size 16)
     (tooltip
-        (label
-            :style "background-color: #282828; padding: 4px; color: #e5c07b"
-            :text "Address: ${wlanStatus.address}")
-        (label 
-            :markup "<span color='#E5C07B'>${wlanStatus.type}:</span>${wlanStatus.ssid}"))
+        (networkStatus)
+        (label :markup "<span color='#E5C07B'>NET:</span>${netSpeed}"))
     (label 
       :class "border-right"
       :markup "<span color='#E5C07B'>CPU:</span>${round(EWW_CPU.avg,1)}%")
@@ -42,14 +57,13 @@
       :markup "<span color='#E5C07B'>GPU TEMP:</span>${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C")
     (label :class "border-right" :style "color:#E5C07B" :text {formattime(EWW_TIME, '%a, %d %b %H:%M')})))
 
-(defvar activeWorkspaceId "1")
-(defvar activeWindow "")
-(defvar activeWindowIcon "archlinux")
-(defpoll
-    wlanStatus
-    :interval "2s"
-    "networkctl status wlan0 --json short | jq '{type: .Type, ssid: .SSID,
-    state: .AddressState, address: .Addresses[0].Address | join(\".\")}'")
+(defvar hyprTrackerStats "{}")
+(defvar netSpeed "")
+
+(defpoll wlan0Status :interval "1s" "networkctl status wlan0 --json short | jq '{ssid: .SSID}'")
+(defpoll ipStatus
+    :interval "1s"
+    "ip route | grep default | awk '{ print $9, $5, $3 }' | column -t -N ip,iface,gateway -J | jq '{ip: .table[].ip, iface: .table[].iface, gateway: .table[].gateway}'")
 
 (defwindow bar
   :monitor 0
@@ -77,7 +91,6 @@
   (image
     :path "/home/rituraj/pictures/wallpapers/current.jpg"
     :image-width "2560"))
-
 
 (defwindow calendar
     :monitor 0
