@@ -35,12 +35,12 @@ hi! link Float String
 hi Function guifg=#d0e080 ctermfg=NONE cterm=none
 
 hi Statement guifg=#44aaee
-hi Conditional guifg=#FFD449
-hi Repeat guifg=#FFD449
-hi Label guifg=#FFD449
-hi Operator guifg=#FFD449
-hi Keyword guifg=#44aaee
-hi Exception guifg=#FFD449
+hi! link Conditional Statement
+hi! link Repeat Statement
+hi! link Label Statement
+hi! link Operator Statement
+hi! link Keyword Statement
+hi! link Exception Statement
 
 hi Identifier guifg=#d0d0d0 ctermfg=NONE cterm=none
 hi Type guifg=#d0d0d0
@@ -48,13 +48,13 @@ hi StorageClass guifg=#d0d0d0
 hi Structure guifg=#d0d0d0
 hi Typedef guifg=#d0d0d0
 
-hi PreProc guifg=#ffd449
-hi Include guifg=#ffd449
-hi Define guifg=#ffd449
-hi Macro guifg=#ffd449
-hi PreCondit guifg=#ffd449
+hi PreProc guifg=#44aaee
+hi! link Include Statement
+hi! link Define Statement
+hi! link Macro Statement
+hi! link PreCondit Statement
 
-hi Special guifg=#ffd449
+hi Special guifg=#44aaee
 
 hi Comment guifg=#777777
 hi ColorColumn guibg=#262626

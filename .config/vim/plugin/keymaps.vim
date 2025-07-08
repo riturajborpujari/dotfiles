@@ -38,8 +38,8 @@ vmap <C-n> :m '>+1<cr>gv=gv
 function s:enable_lsp_mappings() abort
     nmap K :LspHover<cr>
     nmap <silent><c-w>d :call Custom_vim_lsp_show_diagnostic()<cr>
-    nnoremap <buffer> <expr><c-a-n> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-a-p> lsp#scroll(-4)
+    nnoremap <buffer> <expr><c-n> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-p> lsp#scroll(-4)
     nmap gd :LspDefinition<cr>
     nmap gh :LspReferences<cr>
     nmap gp :LspDocumentFormat<cr>
