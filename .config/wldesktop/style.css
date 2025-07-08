@@ -1,0 +1,22 @@
+window {
+    background-color: rgba(0.2, 0.2, 0.2, 0.85);
+    color: #d0d080;
+    font-size: 18px;
+    font-family: 'NotoSans Mono';
+    padding-right: 8px;
+}
+
+.clock {
+}
+
+.program-title {
+}
+
+.workspace {
+    padding: 8px 12px;
+}
+
+.active {
+    background-color: #d0d080;
+    color: #202020;
+}
