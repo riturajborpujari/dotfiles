@@ -23,6 +23,7 @@ set smartindent
 set autoindent
 set scrolloff=8
 set ttimeoutlen=50
+set splitright
 
 set nohls
 set incsearch
