@@ -1,6 +1,6 @@
 window {
     background-color: rgba(0.2, 0.2, 0.2, 0.85);
-    color: #d0d080;
+    color: #a0b0f0;
     font-size: 18px;
     font-family: 'NotoSans Mono';
     padding-right: 8px;
@@ -17,6 +17,6 @@ window {
 }
 
 .active {
-    background-color: #d0d080;
+    background-color: #a0b0f0;
     color: #202020;
 }
