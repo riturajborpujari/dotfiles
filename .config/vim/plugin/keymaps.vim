@@ -60,6 +60,7 @@ function! Custom_vim_lsp_show_diagnostic()
     if has_key(l:diagnostic, 'message')
         let l:winid = lsp#ui#vim#output#floatingpreview("")
         let l:message = l:diagnostic['message']
+        call setbufvar(winbufnr(l:winid), 'lsp_do_conceal', 1)
         call lsp#ui#vim#output#setcontent(l:winid, l:message, 'markdown')
     endif
 endfunction
