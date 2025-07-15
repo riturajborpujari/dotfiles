@@ -1,0 +1,21 @@
+[submodule ".config/vim/pack/vim/start/fzf"]
+	path = .config/vim/pack/vim/start/fzf
+	url = https://github.com/junegunn/fzf
+[submodule ".config/vim/pack/vim/start/fzf.vim"]
+	path = .config/vim/pack/vim/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule ".config/vim/pack/vim/start/buffer-marks.vim"]
+	path = .config/vim/pack/vim/start/buffer-marks.vim
+	url = https://github.com/riturajborpujari/buffer-marks.vim
+[submodule ".config/vim/pack/vim/start/autobrace.vim"]
+	path = .config/vim/pack/vim/start/autobrace.vim
+	url = https://github.com/riturajborpujari/autobrace.vim
+[submodule ".config/vim/pack/vim/start/asyncomplete.vim"]
+	path = .config/vim/pack/vim/start/asyncomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim
+[submodule ".config/vim/pack/vim/start/asyncomplete-lsp.vim"]
+	path = .config/vim/pack/vim/start/asyncomplete-lsp.vim
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
+[submodule ".config/vim/pack/vim/start/vim-lsp"]
+	path = .config/vim/pack/vim/start/vim-lsp
+	url = https://github.com/riturajborpujari/vim-lsp
