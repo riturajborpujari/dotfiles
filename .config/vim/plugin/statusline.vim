@@ -26,7 +26,6 @@ set statusline+=%5*%{(Modetext()=='Visual\ Block')?'\ \ Visual\ Block\ ':''}%*
 set statusline+=%6*%{(Modetext()=='Command')?'\ \ Command\ ':''}%*
 set statusline+=%7*%{(Modetext()==#'Replace')?'\ \ Replace\ ':''}%*
 set statusline+=\ %f\ %=%3*%m%*\ %2*%y%*\ %l,%c\ 
-set statusline+=%{mode()}
 set noshowmode
 
 hi User1 guibg=#2288dd guifg=#282828
