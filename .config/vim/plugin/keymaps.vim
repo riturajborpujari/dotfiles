@@ -21,11 +21,10 @@ vmap <silent> <leader>P     "+P
 nmap <leader>t              :vertical terminal<cr>
 
 nmap gls                    :ls<cr>:b 
-nmap glm                    :MarksListToggle<cr>
-nmap go                     :GoToMark<cr>
-nmap gm                     :Mark<cr>
 nmap gwo                    :Files<cr>
 nmap gln                    :cn<cr>
+nmap gns                    :mks! ~/.local/state/vim/sessions/
+nmap gnl                    :so ~/.local/state/vim/sessions/
 nmap glp                    :cp<cr>
 nmap ]l                     :lne<cr>
 nmap [l                     :lp<cr>
