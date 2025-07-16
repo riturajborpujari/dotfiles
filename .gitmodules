@@ -4,9 +4,6 @@
 [submodule ".config/vim/pack/vim/start/fzf.vim"]
 	path = .config/vim/pack/vim/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
-[submodule ".config/vim/pack/vim/start/buffer-marks.vim"]
-	path = .config/vim/pack/vim/start/buffer-marks.vim
-	url = https://github.com/riturajborpujari/buffer-marks.vim
 [submodule ".config/vim/pack/vim/start/autobrace.vim"]
 	path = .config/vim/pack/vim/start/autobrace.vim
 	url = https://github.com/riturajborpujari/autobrace.vim
