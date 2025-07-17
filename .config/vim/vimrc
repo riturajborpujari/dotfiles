@@ -6,6 +6,7 @@ set relativenumber
 set number
 set signcolumn=no
 set laststatus=2
+set title
 
 set tabstop=4
 set softtabstop=4
