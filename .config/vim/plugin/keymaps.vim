@@ -23,8 +23,8 @@ nmap <leader>t              :vertical terminal<cr>
 nmap gls                    :ls<cr>:b 
 nmap gwo                    :Files<cr>
 nmap gln                    :cn<cr>
-nmap gns                    :mks! ~/.local/state/vim/sessions/
-nmap gnl                    :so ~/.local/state/vim/sessions/
+nmap gns                    :SessionSave 
+nmap gnl                    :SessionLoad 
 nmap glp                    :cp<cr>
 nmap ]l                     :lne<cr>
 nmap [l                     :lp<cr>
