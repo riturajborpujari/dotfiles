@@ -25,8 +25,10 @@ set statusline+=%5*%{(Modetext()==#'Visual\ Line')?'\ \ Visual\ Line\ ':''}%*
 set statusline+=%5*%{(Modetext()=='Visual\ Block')?'\ \ Visual\ Block\ ':''}%*
 set statusline+=%6*%{(Modetext()=='Command')?'\ \ Command\ ':''}%*
 set statusline+=%7*%{(Modetext()==#'Replace')?'\ \ Replace\ ':''}%*
-set statusline+=\ %f\ %=%3*%m%*\ %2*%y%*\ %l,%c\ 
+set statusline+=\ %t\ %=%3*%m%*\ %2*%y%*\ %l,%c\ 
 set noshowmode
+
+autocmd ModeChanged * redrawstatus!
 
 hi User1 guibg=#2288dd guifg=#e0e0e0
 hi User2 guibg=#363636 guifg=#2288dd
