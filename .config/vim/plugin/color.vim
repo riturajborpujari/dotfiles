@@ -17,7 +17,7 @@ hi Pmenu guibg=#2f2f2f
 hi PmenuThumb guibg=#666666
 hi PmenuSel guibg=#666666 guifg=NONE ctermfg=NONE
 hi PmenuSbar guibg=NONE ctermbg=NONE
-hi Normal guibg=NONE
+hi Normal guibg=NONE guifg=#b0b0b0
 hi LspErrorText ctermfg=203 ctermbg=none
 hi LspErrorHighlight ctermfg=203 ctermbg=none cterm=underline
 hi LspHintText ctermfg=144 ctermbg=none cterm=none
@@ -25,16 +25,16 @@ hi LineNr guifg=#e5c07b
 hi LineNrAbove ctermfg=240
 hi LineNrBelow ctermfg=240
 
-hi String guifg=#e02c38
+hi String guifg=#b6a0a0
 hi! link Constant String
 hi! link Character String
 hi! link Number String
 hi! link Boolean String
 hi! link Float String
 
-hi Function guifg=#d0e080 ctermfg=NONE cterm=none
+hi Function guifg=#e0a050 ctermfg=NONE cterm=none
 
-hi Statement guifg=#44aaee
+hi Statement guifg=#d0d0d0
 hi! link Conditional Statement
 hi! link Repeat Statement
 hi! link Label Statement
