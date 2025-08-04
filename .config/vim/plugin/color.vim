@@ -12,27 +12,21 @@ endif
 
 set background=dark
 
-" colorscheme gruvbox
 hi Pmenu guibg=#2f2f2f
 hi PmenuThumb guibg=#666666
 hi PmenuSel guibg=#666666 guifg=NONE ctermfg=NONE
 hi PmenuSbar guibg=NONE ctermbg=NONE
-hi Normal guibg=NONE guifg=#b0b0b0
-hi LspErrorText ctermfg=203 ctermbg=none
-hi LspErrorHighlight ctermfg=203 ctermbg=none cterm=underline
-hi LspHintText ctermfg=144 ctermbg=none cterm=none
+hi Normal guibg=NONE guifg=#a0a0a0
 hi LineNr guifg=#e5c07b
 hi LineNrAbove ctermfg=240
 hi LineNrBelow ctermfg=240
 
-hi String guifg=#b6a0a0
+hi String guifg=#22aa33
 hi! link Constant String
 hi! link Character String
 hi! link Number String
 hi! link Boolean String
 hi! link Float String
-
-hi Function guifg=#e0a050 ctermfg=NONE cterm=none
 
 hi Statement guifg=#d0d0d0
 hi! link Conditional Statement
@@ -42,33 +36,37 @@ hi! link Operator Statement
 hi! link Keyword Statement
 hi! link Exception Statement
 
-hi Identifier guifg=#d0d0d0 ctermfg=NONE cterm=none
-hi Type guifg=#d0d0d0
-hi StorageClass guifg=#d0d0d0
-hi Structure guifg=#d0d0d0
-hi Typedef guifg=#d0d0d0
+hi Identifier guifg=NONE ctermfg=NONE cterm=none
+hi Function guifg=#e5c07b ctermfg=NONE cterm=none
 
-hi PreProc guifg=#44aaee
+hi Type guifg=#e0e0e0
+hi! link StorageClass Type
+hi! link Structure Type
+hi! link Typedef Type
+
+hi PreProc guifg=#e5c07b
 hi! link Include Statement
 hi! link Define Statement
 hi! link Macro Statement
 hi! link PreCondit Statement
 
-hi Special guifg=#44aaee
-
+hi Special guifg=#e5c07b
 hi Comment guifg=#777777
 hi ColorColumn guibg=#262626
-
+hi CursorLine cterm=NONE guifg=#e5c07b guibg=NONE
+hi CursorLineNr cterm=NONE guifg=#e5c07b
 hi StatusLine guifg=#bbbbbb guibg=#333333 cterm=NONE
 hi StatusLineNC guifg=#666666 guibg=#333333 cterm=NONE
-hi netrwDir guifg=#bbbbbb guibg=NONE cterm=NONE
-hi CursorLine cterm=NONE
 hi VertSplit guifg=#303030 guibg=#999999
 hi Folded guibg=#303030 guifg=#999999
-hi CursorColumn guibg=NONE guifg=#e4e4e0 
+hi CursorColumn guibg=NONE guifg=#e4e4e0  cterm=NONE
 
 hi! link Todo Statement
-hi! link MatchParen Type
+hi MatchParen guibg=#606060 guifg=#e5c07b
 hi NonText guifg=#444444
 
+hi netrwDir guifg=#bbbbbb guibg=NONE cterm=NONE
+
+hi LspErrorText ctermfg=203 ctermbg=none
 hi LspErrorHighlight guifg=NONE ctermfg=NONE cterm=underline
+hi LspHintText ctermfg=144 ctermbg=none cterm=none
