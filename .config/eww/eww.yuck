@@ -1,89 +1,34 @@
-(deflisten netSpeed "~/.config/eww/net_tracker.sh")
-(defpoll wlan0Status :interval "1s" "networkctl status wlan0 --json short | jq '{ssid: .SSID}'")
-(defpoll ipStatus
-    :initial "{}"
-    :interval "1s"
-    "ip route | grep default | awk '{ print $9, $5, $3 }' | column -t -N ip,iface,gateway -J | jq '{ip: .table[].ip, iface: .table[].iface, gateway: .table[].gateway}'")
-
-(defwidget metric [name icon]
-    (box 
-        :orientation "v"
+(defpoll activeNetwork :interval "1s" 
+    `networkctl status --json short |
+        jq -c '.Interfaces[] | select(.OnlineState=="online")' |
+        jq -c '{ip:.Addresses[] | select(.Family==2) | .Address|join("."), ssid: .SSID, type:.Type}'`)
+(defvar activeWindow "")
+(defvar activeWorkspaceId "1")
+(defwindow topbar
+    :monitor 0
+    :exclusive true
+    :stacking "fg"
+    :geometry (geometry :x "0" :y "0" :width "100%" :anchor "top center")
+    (centerbox
+        :class "container"
+        :orientation "h"
         :space-evenly false
-        :spacing 16
         (box
             :orientation "h"
-            :spacing 16
-            :valign "center" :space-evenly false
-            (image :icon {icon} :icon-size "large-toolbar")
-            (label :text {name} :style "font-size: 14pt;"))
-        (box
-            :orientation "v"
             :space-evenly false
-            :spacing 4
-            :valign "center"
-            (children))))
-
-(defwindow sidebar
-    :monitor 0
-    :exclusive false
-    :stacking "overlay"
-    :geometry (geometry :y "4" :x "4" :anchor "top right") 
-        (box
-            :style "background-color: rgba(0.2,0.2,0.2,0.8); color:#d0d0d0; padding: 16px"
-            :valign "start"
             :halign "start"
-            :spacing 8
+            :spacing 12
+            (label :class "shaded" :halign "start" :style "color: #e5c07b" :text {activeWorkspaceId})
+            (label :halign "start" :style "color: #b0b0b0" :text {activeWindow})
+            )
+        (label :text "")
+        (box
+            :orientation "h"
             :space-evenly false
-            :orientation "v"
-            :width "500"
-            (box 
-                :style "border: 1px solid #404040; padding 0px;"
-                :orientation "h"
-                :space-evenly true
-                :spacing 0
-                (calendar
-                    :class "calendar"
-                    :show-details true
-                    :show-heading true
-                    :style "font-size:13pt;"))
-            (box
-                :orientation  "h"
-                :spacing 0
-                :style "border: 1px solid #404040; padding: 4px"
-                :space-evenly true
-                (metric
-                    :icon "cpu"
-                    :name "CPU"
-                    (label :text "Usage: ${round(EWW_CPU.avg,1)}%" :halign "start")
-                    (label :text "Temp : ${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C" :halign "start"))
-                )
-            (box
-                :orientation  "h"
-                :spacing 0
-                :style "border: 1px solid #404040; padding: 4px"
-                :space-evenly true
-                (metric 
-                    :icon "ram" 
-                    :name "RAM"
-                    (label :text "Usage: ${round(EWW_RAM.used_mem_perc,1)}%"))
-                (metric
-                    :icon "video-card"
-                    :name "GPU"
-                    (label :text "Temp: ${round(EWW_TEMPS.AMDGPU_JUNCTION, 1)}°C")))
-            (box 
-                :orientation  "h"
-                :spacing 0
-                :style "border: 1px solid #404040; padding: 4px"
-                :space-evenly false
-                (metric 
-                    :icon "network"
-                    :name "Network"
-                    (label
-                        :halign "start"
-                        :style "padding: 8px; color: #d0d0d0;"
-                        :markup "Active  : ${ipStatus?.iface}
-Address : ${ipStatus?.ip}
-Gateway : ${ipStatus?.gateway}
-SSID    : ${wlan0Status?.ssid}
-Usage   : ${netSpeed}")
-                ))))
+            :spacing "12"
+            :halign "end"
+            (label :class "border-right" :style "color: #64ba83" :text "IP ${activeNetwork.ip} [${activeNetwork.type}: ${activeNetwork.ssid}]")
+            (label :class "border-right" :style "color: #da8a22" :text "RAM ${round(EWW_RAM.used_mem_perc, 2)}%")
+            (label :class "border-right" :style "color: #e5c07b" :text "CPU ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+            (label :style "color: #44baee" :text {formattime(EWW_TIME, "%d %b, %H:%M")}))))
+

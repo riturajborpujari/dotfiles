@@ -1,20 +1,25 @@
 * {
   all: unset;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "NotoSans Mono";
+  color: #a0a0a0;
 }
 
-.bordered {
-  padding: 8px 12px;
-  background-color: #202020;
-  color: #808080;
+.topbar {
+  background-color: #181818;
 }
 
-.active {
-  color: #202020;
-  background-color: #e5c07b;
+.border-right {
+  border-right: 1px solid #606060;
+  padding-right: 8px;
 }
 
+.shaded {
+  background-color: #404040;
+  padding: 2px 8px;
+}
+
+// For systray menu
 menu {
   background-color: rgba(#303030, 1.0);
   border-radius: 4px;
@@ -28,17 +33,4 @@ menuitem {
 menuitem:hover {
   background-color: #d0d0d0;
   color: #000;
-}
-
-.border-right {
-  padding: 8px;
-}
-
-.calendar {
-  padding: 4px;
-}
-
-.calendar:selected {
-  background-color: #e5c07b;
-  color: #262626;
 }
