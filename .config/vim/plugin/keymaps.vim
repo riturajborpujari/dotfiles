@@ -17,16 +17,19 @@ vmap <silent> <leader>Y     "+Y
 vmap <silent> <leader>p     "+p
 vmap <silent> <leader>P     "+P
 
+tmap <C-[>                          <C-W>N
+tmap <C-w>p                         <C-W>""
+
 nmap gl                             gF
 nmap <silent><leader>t              :terminal<cr>
 nmap <silent><leader>c              :terminal<cr><C-W>N:only<cr>i
-nmap <silent><leader>l              :ls<cr>:b 
+nmap <leader>l                      :ls<cr>:b 
 nmap <silent><leader>e              :Sexplore<cr>
 nmap <silent><leader>we             :Sexplore .<cr>
-nmap <silent><leader>ff             :Files<cr>
+nmap <silent><leader>wf             :Files<cr>
 nmap <silent><leader>bf             :Buffers<cr>
-nmap <silent><leader>ns             :SessionSave 
-nmap <silent><leader>nl             :SessionLoad 
+nmap <leader>ns                     :SessionSave 
+nmap <leader>nl                     :SessionLoad 
 nmap <silent>]q                     :cn<cr>
 nmap <silent>[q                     :cp<cr>
 nmap <silent>]l                     :lne<cr>
