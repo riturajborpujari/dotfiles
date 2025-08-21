@@ -1,12 +1,12 @@
 * {
   all: unset;
-  font-size: 16px;
+  font-size: 12pt;
   font-family: "NotoSans Mono";
-  color: #a0a0a0;
 }
 
 .topbar {
   background-color: #181818;
+  color: #a0a0a0;
 }
 
 .border-right {
@@ -15,7 +15,7 @@
 }
 
 .shaded {
-  background-color: #404040;
+  background-color: #303030;
   padding: 2px 8px;
 }
 
@@ -23,7 +23,7 @@
 menu {
   background-color: rgba(#303030, 1.0);
   border-radius: 4px;
-  color: #d0d0d0;
+  color: #a0a0a0;
 }
 
 menuitem {

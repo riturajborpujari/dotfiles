@@ -27,8 +27,16 @@
             :space-evenly false
             :spacing "12"
             :halign "end"
-            (label :class "border-right" :style "color: #64ba83" :text "IP ${activeNetwork.ip} [${activeNetwork.type}: ${activeNetwork.ssid}]")
-            (label :class "border-right" :style "color: #da8a22" :text "RAM ${round(EWW_RAM.used_mem_perc, 2)}%")
-            (label :class "border-right" :style "color: #e5c07b" :text "CPU ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
-            (label :style "color: #44baee" :text {formattime(EWW_TIME, "%d %b, %H:%M")}))))
+            (label
+                :class "border-right"
+                :markup "<span color='#e5c07b'>IP</span> ${activeNetwork.ip} [${activeNetwork.type}: ${activeNetwork.ssid}]")
+            (label
+                :class "border-right"
+                :markup "<span color='#e5c07b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}%")
+            (label
+                :class "border-right"
+                :markup "<span color='#e5c07b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+            (label
+                :class "border-right"
+                :markup "<span color='#e5c07b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")}</span>"))))
 
