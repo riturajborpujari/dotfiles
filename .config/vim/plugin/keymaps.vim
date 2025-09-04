@@ -18,7 +18,7 @@ vmap <silent> <leader>p     "+p
 vmap <silent> <leader>P     "+P
 
 tmap <C-[>                          <C-W>N
-tmap <C-w>p                         <C-W>""
+tmap <C-W>p                         <C-W>""
 
 nmap gl                             gF
 nmap <silent><leader>t              :terminal<cr>
@@ -26,7 +26,7 @@ nmap <silent><leader>c              :terminal<cr><C-W>N:only<cr>i
 nmap <leader>l                      :ls<cr>:b 
 nmap <silent><leader>e              :Sexplore<cr>
 nmap <silent><leader>we             :Sexplore .<cr>
-nmap <silent><leader>wf             :Files<cr>
+nmap <silent><leader>ff             :Files<cr>
 nmap <silent><leader>bf             :Buffers<cr>
 nmap <leader>ns                     :SessionSave 
 nmap <leader>nl                     :SessionLoad 
@@ -38,6 +38,8 @@ nmap <silent>[l                     :lp<cr>
 " group move lines
 vmap <C-p>                  :m '<-2<cr>gv=gv
 vmap <C-n>                  :m '>+1<cr>gv=gv
+vnoremap >                          >gv
+vnoremap <                          <gv
 
 " lsp mappings
 function s:enable_lsp_mappings() abort

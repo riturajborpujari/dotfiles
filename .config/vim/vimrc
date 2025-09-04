@@ -8,6 +8,7 @@ set signcolumn=no
 set laststatus=2
 set title
 set hidden
+set cursorline
 
 set tabstop=4
 set softtabstop=4
@@ -18,7 +19,7 @@ set foldenable
 set foldmethod=indent
 set foldlevel=100
 
-set colorcolumn=81
+set colorcolumn=
 set nowrap
 set textwidth=80
 set smartindent
@@ -45,7 +46,7 @@ let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 syntax enable
 filetype plugin indent on
 
-set path+=src/**
+set path+=**
 set wildmenu
 set wildoptions=pum,fuzzy
 set pumheight=30

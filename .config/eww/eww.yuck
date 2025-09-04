@@ -1,7 +1,8 @@
-(defpoll activeNetwork :interval "1s" 
+(defpoll activeNetwork :interval "3s" 
     `networkctl status --json short |
         jq -c '.Interfaces[] | select(.OnlineState=="online")' |
         jq -c '{ip:.Addresses[] | select(.Family==2) | .Address|join("."), ssid: .SSID, type:.Type}'`)
+(defpoll gpuUsage :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 (defvar activeWindow "")
 (defvar activeWorkspaceId "1")
 (defwindow topbar
@@ -12,15 +13,13 @@
     (centerbox
         :class "container"
         :orientation "h"
-        :space-evenly false
         (box
             :orientation "h"
             :space-evenly false
             :halign "start"
             :spacing 12
-            (label :class "shaded" :halign "start" :style "color: #e5c07b" :text {activeWorkspaceId})
-            (label :halign "start" :style "color: #b0b0b0" :text {activeWindow})
-            )
+            (label :class "shaded" :halign "start" :style "color: #e5c04b" :text {activeWorkspaceId})
+            (label :halign "start" :style "color: #d0d0d0" :text {activeWindow}))
         (label :text "")
         (box
             :orientation "h"
@@ -29,14 +28,14 @@
             :halign "end"
             (label
                 :class "border-right"
-                :markup "<span color='#e5c07b'>IP</span> ${activeNetwork.ip} [${activeNetwork.type}: ${activeNetwork.ssid}]")
+                :markup "<span color='#e5c04b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}%")
             (label
                 :class "border-right"
-                :markup "<span color='#e5c07b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}%")
+                :markup "<span color='#e5c04b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
             (label
                 :class "border-right"
-                :markup "<span color='#e5c07b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+                :markup "<span color='#e5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
             (label
                 :class "border-right"
-                :markup "<span color='#e5c07b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")}</span>"))))
+                :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")}</span>"))))
 

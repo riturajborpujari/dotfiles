@@ -30,10 +30,10 @@ set noshowmode
 
 autocmd ModeChanged * redrawstatus!
 
-hi User1 guibg=#2288dd guifg=#e0e0e0
-hi User2 guibg=#363636 guifg=#2288dd
-hi User3 guibg=#363636 guifg=#dd8822
-hi User4 guibg=#22dd88 guifg=#202020
-hi User5 guibg=#dd8822 guifg=#282828
-hi User6 guibg=#dd2288 guifg=#d0d0d0
-hi User7 guibg=#dd2222 guifg=#d0d0d0
+hi! link User1 Pmenu
+hi! link User2 Type
+hi! link User3 Comment
+hi! link User4 String 
+hi! link User5 Statement
+hi! link User6 Type
+hi! link User7 Comment
