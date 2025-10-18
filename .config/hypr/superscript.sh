@@ -1,7 +1,7 @@
-command=$(echo -e "Application\nSystem\nBluetooth\nKill\nCalculate" | tofi)
+command=$(echo -e "Applications\nSystem\nBluetooth\nKill\nCalculate" | tofi)
 
 case $command in
-    Application)
+    Applications)
         tofi-drun --drun-launch true --prompt "Application "
         ;;
     System)

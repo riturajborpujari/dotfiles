@@ -29,7 +29,7 @@ hi! link Number String
 hi! link Boolean String
 hi! link Float String
 
-hi Statement guifg=#f5c04b cterm=bold
+hi Statement guifg=#efefef cterm=bold
 hi! link Conditional Statement
 hi! link Repeat Statement
 hi! link Label Statement
@@ -40,10 +40,10 @@ hi! link Include Statement
 hi! link Define Statement
 hi! link Macro Statement
 hi! link PreCondit Statement
-hi! link Special Statement
+hi! link Special Function
 
 hi Identifier guifg=NONE ctermfg=NONE cterm=none
-hi Function guifg=#a0a0e0 ctermfg=NONE cterm=none
+hi Function guifg=#f5c04b ctermfg=NONE cterm=none
 hi Type guifg=#d0e0d0
 hi! link StorageClass Type
 hi! link Structure Type

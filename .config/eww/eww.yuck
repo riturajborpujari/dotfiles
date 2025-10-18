@@ -1,10 +1,7 @@
-(defpoll activeNetwork :interval "3s" 
-    `networkctl status --json short |
-        jq -c '.Interfaces[] | select(.OnlineState=="online")' |
-        jq -c '{ip:.Addresses[] | select(.Family==2) | .Address|join("."), ssid: .SSID, type:.Type}'`)
 (defpoll gpuUsage :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 (defvar activeWindow "")
 (defvar activeWorkspaceId "1")
+
 (defwindow topbar
     :monitor 0
     :exclusive true
@@ -36,6 +33,5 @@
                 :class "border-right"
                 :markup "<span color='#e5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
             (label
-                :class "border-right"
-                :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")}</span>"))))
+                :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")} </span>"))))
 
