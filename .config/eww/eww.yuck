@@ -1,27 +1,36 @@
-(defpoll gpuUsage :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
-(defvar activeWindow "")
-(defvar activeWorkspaceId "1")
+(defvar  activeWindow		"")
+(defvar  activeWorkspaceId	"1")
+(defpoll gpuUsage			:interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 
 (defwindow topbar
     :monitor 0
     :exclusive true
     :stacking "fg"
     :geometry (geometry :x "0" :y "0" :width "100%" :anchor "top center")
+
     (centerbox
         :class "container"
         :orientation "h"
+
         (box
             :orientation "h"
             :space-evenly false
             :halign "start"
             :spacing 12
-            (label :class "shaded" :halign "start" :style "color: #e5c04b" :text {activeWorkspaceId})
-            (label :halign "start" :style "color: #d0d0d0" :text {activeWindow}))
+            (label
+				:class "shaded"
+				:halign "start"
+				:style "color: #e5c04b"
+				:text {activeWorkspaceId})
+            (label
+				:halign "start"
+				:text {activeWindow}))
+
         (label :text "")
+
         (box
             :orientation "h"
             :space-evenly false
-            :spacing "12"
             :halign "end"
             (label
                 :class "border-right"
@@ -33,5 +42,5 @@
                 :class "border-right"
                 :markup "<span color='#e5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
             (label
+				:style "padding-left: 8px"
                 :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")} </span>"))))
-
