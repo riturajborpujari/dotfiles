@@ -1,11 +1,3 @@
-if executable('pyright-langserver')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyright-langserver',
-        \ 'cmd': {server_info->['pyright-langserver', '--stdio']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
-
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'tsserver',
@@ -22,14 +14,6 @@ if executable('gopls')
         \ })
 endif
 
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd-server',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'allowlist': ['c', 'h', 'cpp', 'hpp'],
-        \ })
-endif
-
 let g:lsp_use_native_client=0
 let g:lsp_preview_auto_close=0
 let g:lsp_preview_keep_focus=1
@@ -42,7 +26,7 @@ let g:asyncomplete_auto_completeopt=0
 let g:lsp_diagnostics_enabled=1
 let g:lsp_diagnostics_float_cursor=0
 let g:lsp_diagnostics_float_delay=100
-let g:lsp_diagnostics_highlights_enabled=1
+let g:lsp_diagnostics_highlights_enabled=0
 let g:lsp_diagnostics_virtual_text_enabled=0
 let g:lsp_diagnostics_highlights_delay=50
 " let g:lsp_diagnostics_virtual_text_delay=50   
