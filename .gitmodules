@@ -1,12 +1,3 @@
-[submodule ".config/vim/pack/vim/start/fzf"]
-	path = .config/vim/pack/vim/start/fzf
-	url = https://github.com/junegunn/fzf
-[submodule ".config/vim/pack/vim/start/fzf.vim"]
-	path = .config/vim/pack/vim/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
-[submodule ".config/vim/pack/vim/start/autobrace.vim"]
-	path = .config/vim/pack/vim/start/autobrace.vim
-	url = https://github.com/riturajborpujari/autobrace.vim
 [submodule ".config/vim/pack/vim/start/asyncomplete.vim"]
 	path = .config/vim/pack/vim/start/asyncomplete.vim
 	url = https://github.com/prabirshrestha/asyncomplete.vim
