@@ -1,4 +1,4 @@
-command=$(echo -e "Applications\nSystem\nBluetooth\nKill\nCalculate" | tofi)
+command=$(echo -e "Applications\nSystem\nBluetooth\nKill\nCalculate\nKeyboard layout" | tofi)
 
 case $command in
     Applications)
@@ -37,4 +37,15 @@ case $command in
         result=$(echo "" | tofi --require-match false --prompt "Calculate " | bc)
         echo $result | tofi --require-match false --prompt "result= " | wl-copy
         ;;
+	'Keyboard layout')
+        layout=$(echo -e "US English\nAxomiya" | tofi --prompt "Layout ")
+		case $layout in
+			'US English')
+				hyprctl switchxkblayout 'keyd-virtual-keyboard' 0
+				;;
+			Axomiya)
+				hyprctl switchxkblayout 'keyd-virtual-keyboard' 1
+				;;
+		esac
+		;;
 esac

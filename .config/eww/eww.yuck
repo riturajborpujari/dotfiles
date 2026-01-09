@@ -2,11 +2,11 @@
 (defvar  activeWorkspaceId	"1")
 (defpoll gpuUsage			:interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 
-(defwindow topbar
+(defwindow bar
     :monitor 0
     :exclusive true
-    :stacking "fg"
-    :geometry (geometry :x "0" :y "0" :width "100%" :anchor "top center")
+    :stacking "bg"
+    :geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
 
     (centerbox
         :class "container"
@@ -32,6 +32,11 @@
             :orientation "h"
             :space-evenly false
             :halign "end"
+			(systray
+				:class "border-right"
+				:valign "center"
+				:orientation "v"
+				:icon-size 17)
             (label
                 :class "border-right"
                 :markup "<span color='#e5c04b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}%")
@@ -43,4 +48,4 @@
                 :markup "<span color='#e5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
             (label
 				:style "padding-left: 8px"
-                :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a, %d %b, %H:%M")} </span>"))))
+                :markup "<span color='#e5c04b'>${formattime(EWW_TIME, "%a %d %b, %H:%M")} </span>"))))

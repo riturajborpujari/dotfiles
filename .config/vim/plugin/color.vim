@@ -22,7 +22,7 @@ hi LineNr guifg=#e5c07b
 hi LineNrAbove ctermfg=240
 hi LineNrBelow ctermfg=240
 
-hi String guifg=#30e020
+hi String guifg=#30d020
 hi! link Constant String
 hi! link Character String
 hi! link Number String
@@ -43,7 +43,7 @@ hi! link PreCondit Statement
 hi! link Special Function
 
 hi Identifier guifg=NONE ctermfg=NONE cterm=none
-hi Function guifg=#f5c04b ctermfg=NONE cterm=none
+hi Function guifg=#fdc04b ctermfg=NONE cterm=none
 hi Type guifg=#d0e0d0
 hi! link StorageClass Type
 hi! link Structure Type
@@ -53,11 +53,11 @@ hi PreProc guifg=#f5c04b
 
 hi Comment guifg=#e08030
 hi ColorColumn guibg=#262626
-hi CursorLine cterm=NONE guibg=#1f1f1f guifg=NONE
+hi CursorLine cterm=NONE guibg=#1a1a1a guifg=NONE
 hi CursorLineNr cterm=NONE guifg=#e5c07b
 hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE
 hi StatusLineNC guifg=#666666 guibg=#1d1d1d cterm=NONE
-hi VertSplit guifg=#303030 guibg=#999999
+hi VertSplit guifg=#181818 guibg=#999999
 hi Folded guibg=#303030 guifg=#999999
 hi CursorColumn guibg=NONE guifg=#e4e4e0  cterm=NONE
 

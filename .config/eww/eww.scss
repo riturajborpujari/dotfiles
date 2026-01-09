@@ -4,7 +4,7 @@
   font-family: "NotoSansM NFM ExtCond Light";
 }
 
-.topbar {
+.bar {
   background-color: #181818;
   color: #d0d0d0;
 }
@@ -15,10 +15,7 @@
 }
 
 .shaded {
-  background-color: #303030;
   padding: 0 8px;
-  border: 1px solid #606060;
-  border-bottom: none;
 }
 
 // For systray menu

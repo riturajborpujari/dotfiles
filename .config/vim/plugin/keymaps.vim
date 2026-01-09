@@ -1,5 +1,27 @@
 let g:mapleader = " "
 
+" Emacs style keybinds for the Command Mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <M-b> <C-Left>
+cnoremap <M-f> <C-Right>
+cnoremap <M-BS>	<C-w>
+cnoremap <M-d> <C-del>
+
+" ... and Insert Mode
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-d> <Del>
+inoremap <M-b> <C-Left>
+inoremap <M-f> <C-Right>
+inoremap <M-BS>	<C-w>
+inoremap <M-d> <C-del>
+
 nmap <C-d>                  <C-d>zz
 nmap <C-u>                  <C-u>zz
 nmap n                      nzzzv
@@ -23,11 +45,11 @@ tmap <C-W>p                         <C-W>""
 nmap gl                             gF
 nmap <silent><leader>t              :terminal<cr>
 nmap <silent><leader>c              :terminal<cr><C-W>N:only<cr>i
+nmap <leader>k						:Man 
+nmap K								:Man <cword><cr>
 nmap <leader>l                      :ls<cr>:b 
-nmap <silent><leader>e              :Sexplore<cr>
-nmap <silent><leader>we             :Sexplore .<cr>
-nmap <silent><leader>ff             :Files<cr>
-nmap <silent><leader>bf             :Buffers<cr>
+nmap <silent><leader>e              :Explore<cr>
+nmap <silent><leader>we             :Explore .<cr>
 nmap <leader>ns                     :SessionSave 
 nmap <leader>nl                     :SessionLoad 
 nmap <silent>]q                     :cn<cr>
