@@ -12,7 +12,7 @@ endif
 
 set background=dark
 
-hi Pmenu guibg=#113366
+hi Pmenu guibg=#444444
 hi! link Visual Pmenu
 hi PmenuThumb guibg=#f5c04b
 hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=bold

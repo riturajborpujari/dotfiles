@@ -1,26 +1,26 @@
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'tsserver',
-        \ 'cmd': {server_info-> ['typescript-language-server','--stdio']},
-        \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
-        \ })
-endif
-
-if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls-server',
-        \ 'cmd': {server_info->['gopls']},
-        \ 'allowlist': ['go'],
-        \ })
-endif
-
-if executable('pyright')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyright-langserver',
-        \ 'cmd': {server_info->['pyright-langserver', '--stdio']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+"if executable('typescript-language-server')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'tsserver',
+"        \ 'cmd': {server_info-> ['typescript-language-server','--stdio']},
+"        \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
+"        \ })
+"endif
+"
+"if executable('gopls')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'gopls-server',
+"        \ 'cmd': {server_info->['gopls']},
+"        \ 'allowlist': ['go'],
+"        \ })
+"endif
+"
+"if executable('pyright')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyright-langserver',
+"        \ 'cmd': {server_info->['pyright-langserver', '--stdio']},
+"        \ 'allowlist': ['python'],
+"        \ })
+"endif
 
 let g:lsp_use_native_client=0
 let g:lsp_preview_auto_close=0

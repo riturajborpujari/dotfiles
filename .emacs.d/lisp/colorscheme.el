@@ -1,7 +1,8 @@
 (custom-theme-set-faces
  'user
  
- '(default ((t (:background "#1d1d1d" :foreground "#efefef"))))
+ '(default ((t (:background "#1e1e1e" :foreground "#efefef"))))
+ '(whitespace-tab ((t (:background "#202020" :foreground "#303030"))))
  '(font-lock-string-face ((t (:foreground "#30d020"))))
  '(font-lock-keyword-face ((t (:foreground "#efefef"))))
  '(font-lock-function-name-face ((t (:foreground "#fdc04b"))))
@@ -10,13 +11,14 @@
  '(font-lock-type-face ((t (:foreground "#d0e0d0"))))
  '(font-lock-constant-face ((t (:foreground "#30d020"))))
  '(font-lock-builtin-face ((t (:foreground "#efefef"))))
- '(region ((t (:background "#113366"))))
+ '(region ((t (:background "#444444"))))
  '(mode-line ((t (:background "#242424" :foreground "#efefef" :box nil))))
  '(mode-line-inactive ((t (:background "#1c1c1c" :foreground "#777777" :box nil))))
  '(line-number ((t (:foreground "#444444"))))
  '(line-number-current-line ((t (:foreground "#e5c07b"))))
  '(minibuffer-prompt ((t (:foreground "#fdc04b"))))
  '(link ((t (:foreground "#fdc04b" :underline t))))
+ '(cursor ((t (:foreground "#ff0000" :background "#fdc04b"))))
  '(link-visited ((t (:foreground "#fdc04b" :underline t)))))
 
 (defun minimal-c-function-call-font-lock ()

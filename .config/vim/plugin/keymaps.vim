@@ -16,11 +16,9 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
-inoremap <C-d> <Del>
 inoremap <M-b> <C-Left>
 inoremap <M-f> <C-Right>
 inoremap <M-BS>	<C-w>
-inoremap <M-d> <C-del>
 
 nmap <C-d>                  <C-d>zz
 nmap <C-u>                  <C-u>zz
