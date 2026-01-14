@@ -15,13 +15,21 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "C-M-h") 'backward-kill-word)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)
-(set-face-attribute 'default nil :font "NotoSansM NFM ExtCondLight-22")
+
+(set-face-attribute 'default nil
+                    :family "NotoSansM Nerd Font Mono"
+                    :height 200
+                    :weight 'extra-light
+                    :width 'extra-condensed)
+
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq whitespace-style '(face tabs tab-mark))
