@@ -17,6 +17,8 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
+(global-set-key (kbd "M-m") #'compile)
+(global-set-key (kbd "M-n") #'recompile)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -27,18 +29,17 @@
 (set-face-attribute 'default nil
                     :family "NotoSansM Nerd Font Mono"
                     :height 200
-                    :weight 'extra-light
+                    :weight 'light
                     :width 'extra-condensed)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq c-basic-offset 4)
+;(global-set-key (kbd "TAB") 'self-insert-command)
+
 (setq whitespace-style '(face tabs tab-mark))
 (global-whitespace-mode 1)
 (setq-default auto-save-mode nil)
-(global-set-key (kbd "TAB") 'self-insert-command)
-(global-set-key (kbd "M-m") #'compile)
-(global-set-key (kbd "M-n") #'recompile)
-(setq c-basic-offset 4)
 (setq grep-command "grep -rn ")
 (setq doc-view-continuous 1)
 (custom-set-faces
@@ -46,7 +47,6 @@
 (defun open-in-zathura ()
   (interactive)
   (start-process "zathura" nil "zathura" (buffer-file-name)))
-(global-set-key (kbd "C-c z") #'open-in-zathura)
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . (lambda ()
                                                 (open-in-zathura)
                                                 (kill-buffer))))
