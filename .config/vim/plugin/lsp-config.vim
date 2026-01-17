@@ -14,13 +14,13 @@
 "        \ })
 "endif
 "
-"if executable('pyright')
-"    au User lsp_setup call lsp#register_server({
-"        \ 'name': 'pyright-langserver',
-"        \ 'cmd': {server_info->['pyright-langserver', '--stdio']},
-"        \ 'allowlist': ['python'],
-"        \ })
-"endif
+if executable('pyright-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyright-langserver',
+        \ 'cmd': {server_info->['pyright-langserver', '--stdio']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
 
 let g:lsp_use_native_client=0
 let g:lsp_preview_auto_close=0
