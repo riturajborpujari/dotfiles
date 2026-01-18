@@ -60,6 +60,7 @@
 (require 'lsp)
 (add-hook 'python-mode-hook (lambda ()
                               (require 'venv)
+                              (auto-revert-mode 0)
                               (eldoc-mode 0)))
 (add-hook 'go-mode-hook (lambda ()
                           (setenv "GOPATH"
