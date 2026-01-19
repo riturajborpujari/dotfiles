@@ -10,7 +10,7 @@
  '(font-lock-variable-name-face ((t (:foreground "#efefef"))))
  '(font-lock-type-face ((t (:foreground "#d0e0d0"))))
  '(font-lock-constant-face ((t (:foreground "#30d020"))))
- '(font-lock-builtin-face ((t (:foreground "#efefef"))))
+ '(font-lock-builtin-face ((t (:foreground "#fdc04b"))))
  '(region ((t (:background "#444444"))))
  '(mode-line ((t (:background "#242424" :foreground "#efefef" :box nil))))
  '(mode-line-inactive ((t (:background "#1c1c1c" :foreground "#777777" :box nil))))

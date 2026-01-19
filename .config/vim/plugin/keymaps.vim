@@ -74,7 +74,7 @@ function s:enable_lsp_mappings() abort
     nmap <silent><leader>d          :call Custom_vim_lsp_show_diagnostic()<cr>
     nmap <silent>]d                 :LspPreviousDiagnostic<cr>gK
     nmap <silent>[d                 :LspNextDiagnostic<cr>gK
-    nmap gka                        :LspDocumentDiagnostics<cr>
+    nmap <silent>]a                 :LspDocumentDiagnostics<cr>
     nmap g.                         :LspCodeAction<cr>
     imap <C-i>                      <cmd>LspSignatureHelp<cr>
     imap <C-Space>                  <Plug>(asyncomplete_force_refresh)

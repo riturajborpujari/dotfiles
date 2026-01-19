@@ -25,7 +25,7 @@
 
 (set-face-attribute 'default nil
                     :family "NotoSansM Nerd Font Mono"
-                    :height 200
+                    :height 220
                     :weight 'light
                     :width 'extra-condensed)
 
@@ -37,7 +37,11 @@
 (global-whitespace-mode 1)
 (setq-default auto-save-mode nil)
 (setq grep-command "grep -rn ")
+
+(setq scroll-step 1)
+(setq scroll-margin 0)
 (setq doc-view-continuous 1)
+
 (defun open-in-zathura ()
   (interactive)
   (start-process "zathura" nil "zathura" (buffer-file-name)))
