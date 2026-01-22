@@ -17,7 +17,7 @@ write_git_branch_colorized () {
 
 export EDITOR=vim
 export PROMPT_DIRTRIM=0
-export PS1="[\u@\h] \w(\j)\$(write_git_branch_colorized)\n$ "
+export PS1="[\u@\h](\j) \w\$(write_git_branch_colorized)\n$ "
 
 export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"

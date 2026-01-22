@@ -39,7 +39,7 @@
 				:icon-size 17)
             (label
                 :class "border-right"
-                :markup "<span color='#e5c04b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}%")
+                :markup "<span color='#e5c04b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}% [${round(EWW_RAM.used_mem / 1024 / 1024, 0)} MB]")
             (label
                 :class "border-right"
                 :markup "<span color='#e5c04b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
