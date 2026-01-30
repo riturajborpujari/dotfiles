@@ -25,7 +25,7 @@
 
 (set-face-attribute 'default nil
                     :family "NotoSansM Nerd Font Mono"
-                    :height 220
+                    :height 250
                     :weight 'light
                     :width 'extra-condensed)
 

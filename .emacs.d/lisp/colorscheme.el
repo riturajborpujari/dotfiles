@@ -1,14 +1,14 @@
 (custom-theme-set-faces
  'user
  
- '(default ((t (:background "#1e1e1e" :foreground "#efefef"))))
- '(whitespace-tab ((t (:background "#202020" :foreground "#303030"))))
+ '(default ((t (:background "#161616" :foreground "#efefef"))))
+ '(whitespace-tab ((t (:background "#181818" :foreground "#303030"))))
  '(font-lock-string-face ((t (:foreground "#30d020"))))
  '(font-lock-keyword-face ((t (:foreground "#efefef"))))
- '(font-lock-function-name-face ((t (:foreground "#fdc04b"))))
- '(font-lock-preprocessor-face ((t (:foreground "#efefef"))))
+ '(font-lock-function-name-face ((t (:foreground "#fdc04b" :bold t))))
+ '(font-lock-preprocessor-face ((t (:foreground "#efefef" :bold t))))
  '(font-lock-variable-name-face ((t (:foreground "#efefef"))))
- '(font-lock-type-face ((t (:foreground "#d0e0d0"))))
+ '(font-lock-type-face ((t (:foreground "#d0e0d0" :bold t))))
  '(font-lock-constant-face ((t (:foreground "#30d020"))))
  '(font-lock-builtin-face ((t (:foreground "#fdc04b"))))
  '(region ((t (:background "#444444"))))

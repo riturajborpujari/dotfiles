@@ -25,7 +25,7 @@ export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
 export GOPATH="$HOME/.local/lib/go"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin"
 
-alias ls="ls -1l --color"
+alias ls="ls -lh --color"
 alias dmk="pwd >> ~/.local/share/dmk/marks.dmk"
 alias cdmk="cd \$(cat ~/.local/share/dmk/marks.dmk | fzf)"
 alias bt-connect="bluetoothctl connect \$(bluetoothctl devices | fzf | awk '{print \$2}')"

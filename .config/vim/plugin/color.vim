@@ -17,10 +17,10 @@ hi! link Visual Pmenu
 hi PmenuThumb guibg=#f5c04b
 hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=bold
 hi PmenuSbar guibg=NONE ctermbg=NONE
-hi Normal guibg=#181818 guifg=#efefef
-hi LineNr guifg=#e5c07b
-hi LineNrAbove ctermfg=240
-hi LineNrBelow ctermfg=240
+hi Normal guibg=NONE guifg=#ffffff ctermbg=NONE ctermfg=NONE
+hi LineNr guifg=#f5c04b
+hi LineNrAbove guifg=#444444 ctermfg=240
+hi LineNrBelow guifg=#444444 ctermfg=240
 
 hi String guifg=#30d020
 hi! link Constant String
@@ -43,8 +43,8 @@ hi! link PreCondit Statement
 hi! link Special Function
 
 hi Identifier guifg=NONE ctermfg=NONE cterm=none
-hi Function guifg=#fdc04b ctermfg=NONE cterm=none
-hi Type guifg=#d0e0d0
+hi Function guifg=#fdc04b ctermfg=NONE cterm=bold gui=bold
+hi Type guifg=#d0e0d0 gui=bold cterm=bold
 hi! link StorageClass Type
 hi! link Structure Type
 hi! link Typedef Type
@@ -53,9 +53,9 @@ hi PreProc guifg=#f5c04b
 
 hi Comment guifg=#e08030
 hi ColorColumn guibg=#262626
-hi CursorLine cterm=NONE guibg=#1a1a1a guifg=NONE
-hi CursorLineNr cterm=NONE guifg=#e5c07b
-hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE
+hi CursorLine cterm=NONE guibg=#181818 guifg=NONE
+hi CursorLineNr cterm=NONE guifg=#f5c04b
+hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE gui=NONE
 hi StatusLineNC guifg=#666666 guibg=#1d1d1d cterm=NONE
 hi VertSplit guifg=#181818 guibg=#999999
 hi Folded guibg=#303030 guifg=#999999

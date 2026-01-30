@@ -52,6 +52,10 @@ set wildoptions=pum,fuzzy
 set pumheight=30
 set wildignore+=node_modules/*,tags
 set completeopt=menu,menuone,noselect,noinsert,popup
+set autochdir
 
 runtime ftplugin/man.vim
 let g:ft_man_open_mode = 'vert'
+
+set guioptions=aegit
+set guifont=NotoSansM\ Nerd\ Font\ Mono\ ExtraCondensed\ ExtraLight\ 20
