@@ -5,24 +5,23 @@
 }
 
 .bar {
-    background-color: #202020;
-    color: #e0e0e0;
+    background-color: #181820;
+    color: #efefef;
 }
 
 .border-right {
     border-right: 1px solid #444;
-    padding: 0 8px;
+    padding: 2px 12px;
 }
 
 .shaded {
-    padding: 0 8px;
+    padding: 2px 12px;
     background-color: #444;
 }
 
 // For systray menu
 menu {
     background-color: rgba(#303030, 1.0);
-    border-radius: 4px;
     color: #a0a0a0;
 }
 

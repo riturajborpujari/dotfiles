@@ -25,11 +25,11 @@
 
 (set-face-attribute 'default nil
                     :family "NotoSansM Nerd Font Mono"
-                    :height 250
+                    :height 270
                     :weight 'light
                     :width 'extra-condensed)
 
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
 

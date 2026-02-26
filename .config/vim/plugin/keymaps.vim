@@ -7,8 +7,10 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
 cnoremap <M-b> <C-Left>
+cnoremap <C-M-b> <C-Left>
 cnoremap <M-f> <C-Right>
-cnoremap <M-BS>	<C-w>
+cnoremap <C-M-f> <C-Right>
+cnoremap <M-BS> <C-w>
 cnoremap <M-d> <C-del>
 
 " ... and Insert Mode

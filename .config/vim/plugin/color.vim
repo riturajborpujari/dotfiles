@@ -12,12 +12,13 @@ endif
 
 set background=dark
 
-hi Pmenu guibg=#444444
+hi SpecialKey guifg=#282828
+hi Pmenu guibg=#444444 guifg=NONE cterm=NONE
 hi! link Visual Pmenu
 hi PmenuThumb guibg=#f5c04b
-hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=bold
+hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=NONE
 hi PmenuSbar guibg=NONE ctermbg=NONE
-hi Normal guibg=NONE guifg=#ffffff ctermbg=NONE ctermfg=NONE
+hi Normal guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 hi LineNr guifg=#f5c04b
 hi LineNrAbove guifg=#444444 ctermfg=240
 hi LineNrBelow guifg=#444444 ctermfg=240
@@ -29,7 +30,7 @@ hi! link Number String
 hi! link Boolean String
 hi! link Float String
 
-hi Statement guifg=#efefef cterm=bold
+hi Statement guifg=#efefef cterm=NONE
 hi! link Conditional Statement
 hi! link Repeat Statement
 hi! link Label Statement
@@ -43,8 +44,8 @@ hi! link PreCondit Statement
 hi! link Special Function
 
 hi Identifier guifg=NONE ctermfg=NONE cterm=none
-hi Function guifg=#fdc04b ctermfg=NONE cterm=bold gui=bold
-hi Type guifg=#d0e0d0 gui=bold cterm=bold
+hi Function guifg=#fdc04b ctermfg=NONE cterm=NONE gui=NONE
+hi Type guifg=#d0e0d0 gui=NONE cterm=NONE
 hi! link StorageClass Type
 hi! link Structure Type
 hi! link Typedef Type
@@ -52,11 +53,13 @@ hi! link Typedef Type
 hi PreProc guifg=#f5c04b
 
 hi Comment guifg=#e08030
-hi ColorColumn guibg=#262626
-hi CursorLine cterm=NONE guibg=#181818 guifg=NONE
+hi ColorColumn guibg=#181818
+hi CursorLine cterm=NONE guibg=#0a0a0a guifg=NONE
 hi CursorLineNr cterm=NONE guifg=#f5c04b
 hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE gui=NONE
 hi StatusLineNC guifg=#666666 guibg=#1d1d1d cterm=NONE
+hi! link StatusLineTermNC StatusLineNC
+hi! link StatusLineTerm StatusLine
 hi VertSplit guifg=#181818 guibg=#999999
 hi Folded guibg=#303030 guifg=#999999
 hi CursorColumn guibg=NONE guifg=#e4e4e0  cterm=NONE

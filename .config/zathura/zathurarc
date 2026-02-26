@@ -1,4 +1,8 @@
+set statusbar-bg "#d0d0d0"
+set statusbar-fg "#181818"
+
 set recolor-darkcolor "#d0d0d0"
-set recolor-lightcolor "#262626"
+set recolor-lightcolor "#181818"
 set recolor-keephue "true"
+set recolor-reverse-video "true"
 set recolor "true"

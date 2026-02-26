@@ -1,37 +1,34 @@
-command=$(echo -e "Applications\nSystem\nBluetooth\nKill\nCalculate\nKeyboard layout" | tofi)
+command=$(echo -e "Applications\nBluetooth\nKill\nCalculate\nKeyboard layout\nLock\nSleep\nSignout\nPoweroff" | tofi)
 
 case $command in
     Applications)
         tofi-drun --drun-launch true --prompt "Application "
         ;;
-    System)
-        sysCommand=$(echo -e "Lock\nSleep\nSignout\nPoweroff\nReboot" | tofi --prompt "System ")
-        case $sysCommand in
-            Lock)
-                loginctl lock-session
-                ;;
-            Sleep)
-                systemctl sleep
-                ;;
-            Signout)
-                hyprctl dispatch exit
-                ;;
-            Poweroff)
-                systemctl poweroff
-                ;;
-            Reboot)
-                systemctl reboot
-                ;;
-        esac
+    Lock)
+        loginctl lock-session
+        ;;
+    Sleep)
+        systemctl sleep
+        ;;
+    Signout)
+        hyprctl dispatch exit
+        ;;
+    Poweroff)
+        systemctl poweroff
         ;;
     Bluetooth)
-        btDevice=$(bluetoothctl devices | grep Device | awk '{printf "%s %s\n",$3,$2}' | tofi --prompt "Bluetooth connect ")
-        deviceId=$(echo $btDevice | awk '{print $2}')
+		declare -a deviceNames=("SI-109BT", "Infinity Glide 510", "Airpods Pro")
+		declare -A deviceIds
+		deviceIds["SI-109BT"]="1E:A6:4B:71:A4:B9"
+		deviceIds["Infinity Glide 510"]="00:1E:7C:95:C3:4C"
+		deviceIds["Airpods Pro"]="40:ED:CF:EE:FF:22"
+        deviceName=$(echo ${deviceNames[@]} | sed 's/, /\n/g' | tofi --prompt "Bluetooth connect ")
+        deviceId=${deviceIds[$deviceName]}
         bluetoothctl connect $deviceId
         ;;
     Kill)
-        process=$(ps -u $USER -o pid,comm | tail -n+2 | tofi --prompt "Kill ")
-        kill -2 $(echo $process | awk '{print $1}')
+        process=$(ps -a --format "%c" | tail -n+2 | tofi --prompt "Kill ")
+        kill -2 $(pidof ${process})
         ;;
     Calculate)
         result=$(echo "" | tofi --require-match false --prompt "Calculate " | bc)

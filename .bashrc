@@ -23,7 +23,7 @@ export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
 
 export GOPATH="$HOME/.local/lib/go"
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 alias ls="ls -lh --color"
 alias dmk="pwd >> ~/.local/share/dmk/marks.dmk"

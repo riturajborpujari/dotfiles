@@ -1,51 +1,51 @@
-(defvar  activeWindow       "")
-(defvar  activeWorkspaceId  "1")
+(defvar  activeWindow		"")
+(defvar  activeWorkspaceId	"1")
 (defpoll gpuUsage           :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
+(defpoll ramUsage			:interval "3s" "free --mebi | grep Mem | awk '{printf(\"%.2f%% [%d MiB]\", ($2-$4-$6) / $2 * 100, $2-$4-$6)}'")
 
 (defwindow bar
-    :monitor 0
-    :exclusive true
-    :stacking "fg"
-    :geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
+	:monitor 0
+	:exclusive true
+	:stacking "fg"
+	:geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
 
-    (centerbox
-        :class "container"
-        :orientation "h"
+	(box
+		:class "container"
+		:orientation "h"
 
-        (box
-            :orientation "h"
-            :space-evenly false
-            :halign "start"
-            :spacing 10
-            (label
-                :class "shaded"
-                :halign "start"
-                :style "color: #f5c04b"
-                :text {activeWorkspaceId})
-            (label
-                :halign "start"
-                :text {activeWindow}))
+		(box
+			:orientation "h"
+			:space-evenly false
+			:halign "start"
+			:spacing 10
+			(label
+				:class "shaded"
+				:halign "start"
+				:style "color: #f5c04b"
+				:tooltip "Workspace ${activeWorkspaceId}"
+				:text {activeWorkspaceId})
+			(label
+				:halign "start"
+				:text {activeWindow}))
 
-        (label :text "")
-
-        (box
-            :orientation "h"
-            :space-evenly false
-            :halign "end"
-            (systray
-                :class "border-right"
-                :valign "center"
-                :orientation "v"
-                :icon-size 17)
-            (label
-                :class "border-right"
-                :markup "<span color='#f5c04b'>RAM</span> ${round(EWW_RAM.used_mem_perc, 2)}% [${round(EWW_RAM.used_mem / 1024 / 1024, 0)} MB]")
-            (label
-                :class "border-right"
-                :markup "<span color='#f5c04b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
-            (label
-                :class "border-right"
-                :markup "<span color='#f5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
-            (label
-                :style "padding-left: 8px"
-                :markup "<span color='#f5c04b'>${formattime(EWW_TIME, "%a %d %b, %H:%M")} </span>"))))
+		(box
+			:orientation "h"
+			:space-evenly false
+			:halign "end"
+			(systray
+				:valign "center"
+				:orientation "h"
+				:spacing "10"
+				:icon-size 20)
+			(label
+			    :class "border-right"
+			    :markup "<span color='#f5c04b'>RAM</span> ${ramUsage}")
+			(label
+			    :class "border-right"
+			    :markup "<span color='#f5c04b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+			(label
+			    :class "border-right"
+			    :markup "<span color='#f5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
+			(label
+				:style "padding-left: 8px"
+				:markup "<span color='#f5c04b'>${formattime(EWW_TIME, "%a %d %b, %H:%M")} </span>"))))
