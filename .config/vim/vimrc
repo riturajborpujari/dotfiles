@@ -38,18 +38,16 @@ set smartcase
 set updatetime=10
 set noswapfile
 set undofile
-set undodir=~/.local/state/vim/undo
+set undodir=~/.local/var/vim/undo
 
 let g:netrw_banner=0
 let g:netrw_menu=0
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-"let g:lsp_log_verbose=1
-"let g:lsp_log_file=expand('~/vim-lsp.log')
 
 syntax enable
 filetype plugin indent on
 
-set path+=**
+set path+=./**
 set wildmenu
 set wildoptions=pum,fuzzy
 set pumheight=30

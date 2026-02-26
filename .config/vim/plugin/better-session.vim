@@ -1,5 +1,5 @@
 let s:current_session = ""
-let s:state_dir = $HOME . '/.local/state/vim/better-sessions'
+let s:state_dir = $HOME . '/.local/var/vim/better-sessions'
 
 " Ensure the state dir exists (UNIX-only fallback)
 function! s:EnsureStateDir()
