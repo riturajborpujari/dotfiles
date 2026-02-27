@@ -140,14 +140,38 @@ def GitDiff()
 	setlocal filetype=diff
 enddef
 
+def GitPush()
+	echo 'Pushing...'
+
+	var out = systemlist('git push')
+
+	if v:shell_error != 0
+	  echohl ErrorMsg
+	  echom join(out, "\n")
+	  echohl None
+	  return
+	endif
+
+	echohl ModeMsg
+	echom 'Push successful'
+	echohl None
+
+	# optional: show git output
+	if len(out) > 0
+	  echom join(out, "\n")
+	endif
+
+	GitStatus()
+enddef
+
 def SetupStatusMappings()
 	nnoremap <buffer> s  <ScriptCmd>Stage()<CR>
 	nnoremap <buffer> u  <ScriptCmd>Unstage()<CR>
 	nnoremap <buffer> r  <ScriptCmd>GitStatus()<CR>
 	nnoremap <buffer> c  <ScriptCmd>GitCommit()<CR>
+	nnoremap <buffer> p  <ScriptCmd>GitPush()<CR>
 	nnoremap <buffer> <CR> <ScriptCmd>GitDiff()<CR>
 enddef
-
 
 def GitStatus()
 	var lines = systemlist('git status --porcelain')
