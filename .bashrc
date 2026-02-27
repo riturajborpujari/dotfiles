@@ -25,6 +25,7 @@ export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
 export GOPATH="$HOME/.local/lib/go"
 export PATH="$HOME/.local/bin:$PATH"
 
+alias top="top -u \${USER} -em"
 alias ls="ls -lh --color"
 alias dmk="pwd >> ~/.local/share/dmk/marks.dmk"
 alias cdmk="cd \$(cat ~/.local/share/dmk/marks.dmk | fzf)"
