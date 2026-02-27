@@ -2,8 +2,6 @@ let g:mapleader = " "
 
 " core keybinds
 nmap <silent><leader>t				:terminal<cr>
-nmap <leader>k						:Man 
-nmap K								:Man <cword><cr>
 nmap <leader>l						:ls<cr>:b 
 nmap <silent><leader>e				:Explore<cr>
 nmap <silent><leader>we				:Explore .<cr>

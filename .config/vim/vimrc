@@ -15,7 +15,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set lcs=tab:»\ 
-set list
+set nolist
 
 set foldenable
 set foldmethod=indent
@@ -53,9 +53,6 @@ set wildoptions=pum,fuzzy
 set pumheight=30
 set wildignore+=node_modules/*,tags
 set completeopt=menu,menuone,noselect,noinsert,popup
-
-runtime ftplugin/man.vim
-let g:ft_man_open_mode = 'vert'
 
 set guioptions=aegit
 set guifont=NotoSansM\ Nerd\ Font\ Mono\ ExtraCondensed\ ExtraLight\ 20
