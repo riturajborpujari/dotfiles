@@ -13,6 +13,7 @@ nmap <silent>]q						:cn<cr>
 nmap <silent>[q						:cp<cr>
 nmap <silent>]l						:lne<cr>
 nmap <silent>[l						:lp<cr>
+nmap <leader>g						:GitStatus<cr>
 
 " Emacs style keybinds for the Command Mode
 cnoremap <C-a>						<Home>
