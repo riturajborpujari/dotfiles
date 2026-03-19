@@ -6,4 +6,4 @@ runtime ftplugin/man.vim
 let g:ft_man_open_mode = 'vert'
 
 nmap <leader>k	:Man 
-nmap K			:Man <cword><cr>
+nmap <silent>K	:Man <cword><cr>

@@ -18,19 +18,19 @@ write_git_branch_colorized () {
 export EDITOR=vim
 export PROMPT_DIRTRIM=0
 export PS1="[\u@\h](\j) \w\$(write_git_branch_colorized)\n$ "
-
 export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
-
 export GOPATH="$HOME/.local/lib/go"
 export PATH="$HOME/.local/bin:$PATH"
+export OLLAMA_HOST_PORT='192.168.1.7:11434'
 
 alias top="top -u \${USER} -em"
 alias ls="ls -lh --color"
-alias dmk="pwd >> ~/.local/share/dmk/marks.dmk"
-alias cdmk="cd \$(cat ~/.local/share/dmk/marks.dmk | fzf)"
+alias dmk="pwd >> ~/.local/var/dmk/marks.dmk"
+alias cdmk="cd \$(cat ~/.local/var/dmk/marks.dmk | fzf)"
 alias bt-connect="bluetoothctl connect \$(bluetoothctl devices | fzf | awk '{print \$2}')"
 alias grep="grep --exclude-dir dist --exclude-dir node_modules --exclude tags --color=always"
 alias wlls="sudo iwctl station wlan0 get-networks"
 alias wlscan="sudo iwctl station wlan0 scan"
 alias wlconn="sudo iwctl station wlan0 connect \$1"
+alias tm="tmux new-session -A -s probe"

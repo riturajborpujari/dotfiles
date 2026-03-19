@@ -10,7 +10,6 @@
 	:geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
 
 	(box
-		:class "container"
 		:orientation "h"
 
 		(box
@@ -21,8 +20,6 @@
 			(label
 				:class "shaded"
 				:halign "start"
-				:style "color: #f5c04b"
-				:tooltip "Workspace ${activeWorkspaceId}"
 				:text {activeWorkspaceId})
 			(label
 				:halign "start"

@@ -19,10 +19,10 @@ def GoDoc(name: string)
 	endif
 
     enew
-    setlocal buftype=nofile bufhidden=wipe noswapfile
-    setlocal filetype=go
+    setlocal buftype=nofile noswapfile filetype=go
 	execute "file GoDoc: " .. symbol
     setline(1, lines)
+	setlocal nomodifiable
     normal! gg
 enddef
 

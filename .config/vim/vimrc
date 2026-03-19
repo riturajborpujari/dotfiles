@@ -39,6 +39,7 @@ set updatetime=10
 set noswapfile
 set undofile
 set undodir=~/.local/var/vim/undo
+set autochdir
 
 let g:netrw_banner=0
 let g:netrw_menu=0

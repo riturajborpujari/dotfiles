@@ -185,9 +185,8 @@ def GitStatus()
 
 	if len(lines) == 0
 		lines = [
-			"Branch: " .. system('git branch --show-current')->trim(),
-			"",
-			"Working tree clean"
+			"Branch      : " .. system('git branch --show-current')->trim(),
+			"Working tree: clean"
 		]
 	endif
 

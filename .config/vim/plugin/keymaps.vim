@@ -3,8 +3,7 @@ let g:mapleader = " "
 " core keybinds
 nmap <silent><leader>t				:terminal<cr>
 nmap <leader>l						:ls<cr>:b 
-nmap <silent><leader>e				:Explore<cr>
-nmap <silent><leader>we				:Explore .<cr>
+nmap <silent><leader>e				:Ls<cr>
 nmap <leader>ns						:SessionSave 
 nmap <leader>nl						:SessionLoad 
 nmap <silent>]q						:cn<cr>
