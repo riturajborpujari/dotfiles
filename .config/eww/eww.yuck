@@ -6,7 +6,7 @@
 (defwindow bar
 	:monitor 0
 	:exclusive true
-	:stacking "fg"
+	:stacking "bottom"
 	:geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
 
 	(box

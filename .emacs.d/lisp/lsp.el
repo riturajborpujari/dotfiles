@@ -1,7 +1,8 @@
 (setq flymake-no-changes-timeout nil)
 (setq flymake-start-on-flymake-mode t)
 (setq flymake-start-on-save-buffer t)
-(global-set-key (kbd "C-c d") 'flymake-start)
+(global-set-key (kbd "C-c f") 'flymake-start)
+(global-set-key (kbd "C-c d") 'flymake-mode)
 
 (setq eldoc-idle-delay 0)
 (setq eldoc-echo-area-use-multiline-p nil)

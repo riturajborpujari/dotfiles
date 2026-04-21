@@ -61,6 +61,9 @@ hi CursorLine cterm=NONE guibg=#0a0a0a guifg=NONE
 hi CursorLineNr cterm=NONE guifg=#f5c04b
 hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE gui=NONE
 hi StatusLineNC guifg=#666666 guibg=#1d1d1d cterm=NONE
+hi! link Tabline LineNrAbove
+hi! link TablineFill LineNrAbove
+hi! link TablineSel StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link StatusLineTerm StatusLine
 hi VertSplit guifg=#181818 guibg=#999999

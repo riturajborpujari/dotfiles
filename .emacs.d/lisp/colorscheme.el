@@ -28,5 +28,6 @@
       1 font-lock-function-name-face))))
 
 (add-hook 'c-mode-hook #'minimal-c-function-call-font-lock)
+(add-hook 'js-mode-hook #'minimal-c-function-call-font-lock)
 
 (provide 'colorscheme)

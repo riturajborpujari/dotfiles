@@ -5,7 +5,8 @@ set nocompatible
 set relativenumber
 set number
 set signcolumn=no
-set laststatus=2
+set laststatus=0
+set statusline=%t\ %l,%c%=%m\ %{strftime('%H:%M')}\ 
 set title
 set titlestring=%f\ -\ Vim
 set hidden
@@ -39,13 +40,13 @@ set updatetime=10
 set noswapfile
 set undofile
 set undodir=~/.local/var/vim/undo
-set autochdir
+set noautochdir
 
 let g:netrw_banner=0
 let g:netrw_menu=0
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
-syntax enable
+syntax on
 filetype plugin indent on
 
 set path+=./**

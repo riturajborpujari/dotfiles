@@ -24,7 +24,7 @@ export GOPATH="$HOME/.local/lib/go"
 export PATH="$HOME/.local/bin:$PATH"
 export OLLAMA_HOST_PORT='192.168.1.7:11434'
 
-alias top="top -u \${USER} -em"
+alias top="top -u \${USER} -em -i"
 alias ls="ls -lh --color"
 alias dmk="pwd >> ~/.local/var/dmk/marks.dmk"
 alias cdmk="cd \$(cat ~/.local/var/dmk/marks.dmk | fzf)"
