@@ -19,7 +19,7 @@ export EDITOR=vim
 export PROMPT_DIRTRIM=0
 export PS1="[\u@\h](\j) \w\$(write_git_branch_colorized)\n$ "
 export FZF_DEFAULT_CMD="fd"
-export FZF_DEFAULT_OPTS="--preview='fzf-preview {}'"
+export FZF_DEFAULT_OPTS="--preview='fzf-preview {}' --bind=ctrl-u:preview-up,ctrl-d:preview-down"
 export GOPATH="$HOME/.local/lib/go"
 export PATH="$HOME/.local/bin:$PATH"
 export OLLAMA_HOST_PORT='192.168.1.7:11434'
