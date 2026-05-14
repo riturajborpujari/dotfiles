@@ -26,14 +26,17 @@
 (setq split-width-threshold 40)
 
 (set-face-attribute 'default nil
-                    :family "NotoSansM Nerd Font Mono"
-                    :height 260
-                    :weight 'light
-                    :width 'extra-condensed)
+					:family "Iosevka"
+					:height 260
+					:weight 'extralight
+					:width 'extra-condensed)
 
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
+
+; Set line length for buffers (needs auto-fill-mode)
+(setq-default fill-column  80)
 
 (setq whitespace-style '(face tabs tab-mark))
 (global-whitespace-mode 1)
@@ -43,6 +46,16 @@
 (setq scroll-step 1)
 (setq scroll-margin 0)
 (setq doc-view-continuous 1)
+
+(setq-default org-hide-emphasis-markers t)
+(setq-default org-hide-leading-stars t)
+(setq-default org-hide-macro-markers t)
+(setq-default org-hide-block-startup t)
+(setq-default org-hide-drawer-startup t)
+(setq-default org-export-with-toc nil)
+(setq-default org-export-with-section-numbers nil)
+(add-hook 'org-mode-hook (lambda()
+						   (org-indent-mode)))
 
 (defun open-in-zathura ()
   (interactive)
@@ -64,6 +77,7 @@
 
 ; "M-x eglot" to trigger LSP connection
 (require 'eglot)
+
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'colorscheme)
 (require 'lsp)
@@ -76,3 +90,5 @@
                                   (concat
                                    (getenv "HOME")
                                    "/.local/lib/go"))))
+
+(require 'rxrj)

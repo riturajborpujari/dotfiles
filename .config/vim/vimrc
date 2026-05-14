@@ -5,13 +5,15 @@ set nocompatible
 set relativenumber
 set number
 set signcolumn=no
-set laststatus=0
+set laststatus=2
 set statusline=%t\ %l,%c%=%m\ %{strftime('%H:%M')}\ 
 set title
 set titlestring=%f\ -\ Vim
 set hidden
 set cursorline
+set noruler
 
+set noexpandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4

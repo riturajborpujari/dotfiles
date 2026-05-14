@@ -1,7 +1,7 @@
 (custom-theme-set-faces
  'user
  
- '(default ((t (:background "#161616" :foreground "#efefef"))))
+ '(default ((t (:background "#101010" :foreground "#efefef"))))
  '(whitespace-tab ((t (:background "#181818" :foreground "#303030"))))
  '(font-lock-string-face ((t (:foreground "#30d020"))))
  '(font-lock-keyword-face ((t (:foreground "#efefef"))))
