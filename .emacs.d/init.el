@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(dolist (pkg '(multiple-cursors go-mode magit))
+(dolist (pkg '(multiple-cursors go-mode magit htmlize))
   (unless (package-installed-p pkg)
     (package-refresh-contents)
     (package-install pkg)))
@@ -92,3 +92,33 @@
                                    "/.local/lib/go"))))
 
 (require 'rxrj)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background "#101010" :foreground "#efefef"))))
+ '(cursor ((t (:foreground "#181818" :background "#efefef"))))
+ '(font-lock-builtin-face ((t (:foreground "#fdc04b"))))
+ '(font-lock-constant-face ((t (:foreground "#30d020"))))
+ '(font-lock-function-name-face ((t (:foreground "#fdc04b"))))
+ '(font-lock-keyword-face ((t (:foreground "#efefef"))))
+ '(font-lock-preprocessor-face ((t (:foreground "#efefef"))))
+ '(font-lock-string-face ((t (:foreground "#30d020"))))
+ '(font-lock-type-face ((t (:foreground "#d0e0d0"))))
+ '(font-lock-variable-name-face ((t (:foreground "#efefef"))))
+ '(line-number ((t (:foreground "#444444"))))
+ '(line-number-current-line ((t (:foreground "#e5c07b"))))
+ '(link ((t (:foreground "#fdc04b" :underline t))))
+ '(link-visited ((t (:foreground "#fdc04b" :underline t))))
+ '(minibuffer-prompt ((t (:foreground "#fdc04b"))))
+ '(mode-line ((t (:background "#242424" :foreground "#efefef" :box nil))))
+ '(mode-line-inactive ((t (:background "#1c1c1c" :foreground "#777777" :box nil))))
+ '(region ((t (:background "#444444"))))
+ '(whitespace-tab ((t (:background "#181818" :foreground "#303030")))))

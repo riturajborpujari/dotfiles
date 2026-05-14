@@ -23,10 +23,11 @@
     (dolist (file files)
       (with-temp-buffer
         (insert-file-contents file)
+		(org-mode)
         (let ((title (cadr (assoc "TITLE" (org-collect-keywords '("TITLE")))))
               (date  (cadr (assoc "DATE"  (org-collect-keywords '("DATE"))))))
           (push
-           (format "- [%s] [[file:%s][%s]]"
+           (format "- %s [[file:%s][%s]]"
                    date
                    (file-relative-name file "~/docs/rxrj/")
                    title)
