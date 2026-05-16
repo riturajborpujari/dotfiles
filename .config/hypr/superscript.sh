@@ -1,4 +1,4 @@
-command=$(echo -e "Applications\nBluetooth\nKill\nCalculate\nKeyboard layout\nLock\nSleep\nSignout\nPoweroff" | tofi)
+command=$(echo -e "Applications\nBluetooth\nKill\nCalculate\nKeyboard layout\nLock\nSleep\nSignout\nHibernate\nPoweroff" | tofi)
 
 case $command in
     Applications)
@@ -13,6 +13,9 @@ case $command in
     Signout)
         hyprctl dispatch exit
         ;;
+	Hibernate)
+		systemctl hibernate
+		;;
     Poweroff)
         systemctl poweroff
         ;;
