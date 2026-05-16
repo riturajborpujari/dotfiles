@@ -29,5 +29,6 @@
 
 (add-hook 'c-mode-hook #'minimal-c-function-call-font-lock)
 (add-hook 'js-mode-hook #'minimal-c-function-call-font-lock)
+(add-hook 'c3-mode-hook #'minimal-c-function-call-font-lock)
 
 (provide 'colorscheme)
