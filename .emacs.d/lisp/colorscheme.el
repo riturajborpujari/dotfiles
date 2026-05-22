@@ -1,14 +1,14 @@
 (custom-theme-set-faces
  'user
  
- '(default ((t (:background "#101010" :foreground "#efefef"))))
+ '(default ((t (:background "#181818" :foreground "#efefef"))))
  '(whitespace-tab ((t (:background "#181818" :foreground "#303030"))))
  '(font-lock-string-face ((t (:foreground "#30d020"))))
  '(font-lock-keyword-face ((t (:foreground "#efefef"))))
  '(font-lock-function-name-face ((t (:foreground "#fdc04b"))))
  '(font-lock-preprocessor-face ((t (:foreground "#efefef"))))
  '(font-lock-variable-name-face ((t (:foreground "#efefef"))))
- '(font-lock-type-face ((t (:foreground "#d0e0d0"))))
+ '(font-lock-type-face ((t (:foreground "#d0f0d0"))))
  '(font-lock-constant-face ((t (:foreground "#30d020"))))
  '(font-lock-builtin-face ((t (:foreground "#fdc04b"))))
  '(region ((t (:background "#444444"))))
@@ -17,9 +17,13 @@
  '(line-number ((t (:foreground "#444444"))))
  '(line-number-current-line ((t (:foreground "#e5c07b"))))
  '(minibuffer-prompt ((t (:foreground "#fdc04b"))))
- '(link ((t (:foreground "#fdc04b" :underline t))))
+ '(org-verbatim ((t (:foreground "#f5c04b"))))
+ '(org-code ((t (:foreground "#f5c04b"))))
+ '(org-document-title ((t (:foreground "#f5c04b" :bold t))))
+ '(org-document-info ((t (:foreground "#f5c04b"))))
  '(cursor ((t (:foreground "#181818" :background "#efefef"))))
- '(link-visited ((t (:foreground "#fdc04b" :underline t)))))
+ '(link ((t (:foreground "#f5c04b" :underline t))))
+ '(link-visited ((t (:foreground "#f5c04b" :underline t)))))
 
 (defun minimal-c-function-call-font-lock ()
   (font-lock-add-keywords
