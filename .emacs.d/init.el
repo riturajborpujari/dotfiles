@@ -37,7 +37,7 @@
 
 ; Set line length for buffers (needs auto-fill-mode)
 (setq-default fill-column  80)
-; Ensures auto-fill-mode is enabled for all major modes
+; This ensures auto-fill-mode is enabled by default
 (setq-default auto-fill-function 'do-auto-fill)
 
 (setq whitespace-style '(face tabs tab-mark))
