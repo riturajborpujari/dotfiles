@@ -11,7 +11,7 @@ case $command in
         systemctl sleep
         ;;
     Signout)
-        hyprctl dispatch exit
+		hyprctl dispatch "hl.dsp.exit()"
         ;;
 	Hibernate)
 		systemctl hibernate
