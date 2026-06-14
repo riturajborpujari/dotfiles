@@ -23,6 +23,8 @@
  '(org-document-info ((t (:foreground "#f5c04b"))))
  '(cursor ((t (:foreground "#181818" :background "#efefef"))))
  '(link ((t (:foreground "#f5c04b" :underline t))))
+ '(company-tooltip ((t (:background "#282828"))))
+ '(company-tooltip-common ((t (:foreground "#f5c04b"))))
  '(link-visited ((t (:foreground "#f5c04b" :underline t)))))
 
 (defun minimal-c-function-call-font-lock ()

@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(dolist (pkg '(multiple-cursors go-mode magit htmlize))
+(dolist (pkg '(multiple-cursors go-mode magit htmlize company))
   (unless (package-installed-p pkg)
     (package-refresh-contents)
     (package-install pkg)))
@@ -17,12 +17,18 @@
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 (global-set-key (kbd "M-m") #'compile)
 (global-set-key (kbd "M-n") #'recompile)
+(global-set-key (kbd "M-/") #'company-complete)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
+
 (setq display-line-numbers-type 't)
 (global-display-line-numbers-mode t)
+
+(global-company-mode t)
+(setq-default company-idle-delay nil)
+
 (setq split-width-threshold 40)
 
 (set-face-attribute 'default nil
