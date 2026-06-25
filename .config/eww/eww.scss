@@ -4,20 +4,23 @@
     font-family: 'Iosevka Light';
 }
 
+.accent {
+  color: #f5806b;
+}
+
 .bar {
-    background-color: #181818;
+    background-color: rgba(24, 24, 24, 0.6);//#181818ff;
     color: #d0d0d0;
 }
 
 .border-right {
     border-right: 1px solid #484848;
-    padding: 2px 8px 0 8px;
+    padding: 3px 8px;
 }
 
 .shaded {
-    padding: 0px 8px;
-    background-color: #484848;
-    color: #f5c04b;
+    padding: 0px 12px;
+    background-color: #363636;
 }
 
 // For systray menu

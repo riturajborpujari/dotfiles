@@ -14,7 +14,7 @@ set background=dark
 
 hi SpecialKey guifg=#f5c04b
 hi Pmenu guibg=#444444 guifg=NONE cterm=NONE
-hi Visual guibg=#484848 guifg=#fefefe
+hi Visual guibg=#484848 guifg=NONE
 hi PmenuThumb guibg=#f5c04b
 hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=NONE
 hi PmenuSbar guibg=NONE ctermbg=NONE
@@ -59,8 +59,8 @@ hi Comment guifg=#e08030
 hi ColorColumn guibg=#1d1d1d
 hi CursorLine cterm=NONE guibg=#1d1d1d guifg=NONE
 hi CursorLineNr cterm=NONE guifg=#f5c04b
-hi StatusLine guifg=#f5c04b guibg=#242424 cterm=NONE gui=NONE
-hi StatusLineNC guifg=#666666 guibg=#1d1d1d cterm=NONE
+hi StatusLine guifg=#f5c04b guibg=#282828 cterm=NONE gui=NONE
+hi StatusLineNC guifg=#d0d0d0 guibg=#363636 cterm=NONE
 hi! link Tabline LineNrAbove
 hi! link TablineFill LineNrAbove
 hi! link TablineSel StatusLine

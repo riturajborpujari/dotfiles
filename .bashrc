@@ -22,7 +22,6 @@ export FZF_DEFAULT_CMD="fd"
 export FZF_DEFAULT_OPTS="--preview='fzf-preview {}' --bind=ctrl-u:preview-up,ctrl-d:preview-down"
 export GOPATH="$HOME/.local/lib/go"
 export PATH="$HOME/.local/bin:$PATH"
-export OLLAMA_HOST_PORT='192.168.1.7:11434'
 
 alias top="top -u \${USER} -em -i"
 alias ls="ls -lh --color"

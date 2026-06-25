@@ -3,6 +3,17 @@
 (defpoll gpuUsage           :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 (defpoll ramUsage			:interval "3s" "free --mebi | grep Mem | awk '{printf(\"%.2f%% [%d MiB]\", ($2-$4-$6) / $2 * 100, $2-$4-$6)}'")
 
+(defwindow paper
+	:monitor 0
+	:exclusive false
+	:stacking "bg"
+	:geometry (geometry :x "0" :y "0" :width "100%" :height "100%" :anchor "top center")
+	
+	(image
+		:path "/home/rituraj/.config/wallpaper.jpg"
+		:image-width "2560"
+		:image-height "1440"))
+
 (defwindow bar
 	:monitor 0
 	:exclusive true
@@ -18,7 +29,7 @@
 			:halign "start"
 			:spacing 10
 			(label
-				:class "shaded"
+				:class "shaded accent"
 				:halign "start"
 				:text {activeWorkspaceId})
 			(label
@@ -36,13 +47,13 @@
 				:icon-size 20)
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5c04b'>RAM</span> ${ramUsage}")
+			    :markup "<span color='#f5806b'>RAM</span> ${ramUsage}")
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5c04b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+			    :markup "<span color='#f5806b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5c04b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
+			    :markup "<span color='#f5806b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
 			(label
 				:style "padding-left: 8px"
-				:markup "<span color='#f5c04b'>${formattime(EWW_TIME, "%a %d %b, %H:%M")} </span>"))))
+				:markup "<span color='#f5806b'>${formattime(EWW_TIME, "%a, %d %b | %H:%M")} </span>"))))

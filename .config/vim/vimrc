@@ -12,6 +12,7 @@ set titlestring=%f\ -\ Vim
 set hidden
 set cursorline
 set noruler
+set mouse=a
 
 set noexpandtab
 set tabstop=4

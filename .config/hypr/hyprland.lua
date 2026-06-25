@@ -10,14 +10,12 @@ hl.monitor({
 local terminal			= "kitty"
 local launcher    		= "tofi-drun --drun-launch true"
 local toggleAudioCtl	= "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
-local meStream			= "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=700:h=330:x=250:y=200,hflip /dev/video0"
+local meStream			= "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
 
 -- Event Handlers
 hl.on("hyprland.start", function ()
-	hl.exec_cmd("eww open bar")
-	hl.exec_cmd("$HOME/.local/bin/wlframe /home/rituraj/pictures/wallpapers/current.jpg")
+	hl.exec_cmd("eww open-many bar paper")
 	hl.exec_cmd("hypridle")
-	hl.exec_cmd("emacs --daemon")
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland")
 end)
@@ -26,14 +24,14 @@ hl.on("window.active", function (window)
 	if (window.active ~= nil) then
 		hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
 	else
-		hl.exec_cmd("eww update 'activeWindow= '")
+		hl.exec_cmd("eww update 'activeWindow=Desktop'")
 	end
 end)
 
 hl.on("window.destroy", function ()
 	window = hl.get_active_window()
 	if (window == nil) then
-		hl.exec_cmd("eww update 'activeWindow= '")
+		hl.exec_cmd("eww update 'activeWindow=Desktop'")
 	end
 end)
 
@@ -64,22 +62,23 @@ hl.on("screenshare.state", function (active, type, name)
 end)
 
 -- Environment variables
-hl.env("XCURSOR_SIZE",							"24")
-hl.env("HYPRCURSOR_SIZE",						"24")
-hl.env("GDK_DPI_SCALE",							"1.3333")
-hl.env("QT_SCALE_FACTOR",						"1.3333")
-hl.env("XDG_CURRENT_DESKTOP",					"Hyprland")
-hl.env("XDG_SESSION_TYPE",						"wayland")
-hl.env("XDG_SESSION_DESKTOP",					"Hyprland")
-hl.env("QT_QPA_PLATFORM",						"wayland")
-hl.env("QT_QPA_PLATFORMTHEME",					"qt5ct")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION",	"1")
-hl.env("XCURSOR_SIZE",							"24")
-hl.env("HYPRCURSOR_THEME",						"rose-pine-hyprcursor")
-hl.env("HYPRCURSOR_SIZE",						"36")
-hl.env("GRIM_DEFAULT_DIR",						"/home/rituraj/pictures/screenshots")
-hl.env("WLLOCK_MEDIA_FILE",						"$HOME/.local/share/wllock/lockscreen.mp4")
-hl.env("GSK_RENDERER",							"vulkan")
+hl.env("XCURSOR_SIZE"                        ,"24")
+hl.env("HYPRCURSOR_SIZE"                     ,"24")
+hl.env("GDK_DPI_SCALE"                       ,"1.3333")
+hl.env("QT_SCALE_FACTOR"                     ,"1.3333")
+hl.env("XDG_CURRENT_DESKTOP"                 ,"Hyprland")
+hl.env("XDG_SESSION_TYPE"                    ,"wayland")
+hl.env("XDG_SESSION_DESKTOP"                 ,"Hyprland")
+hl.env("QT_QPA_PLATFORM"                     ,"wayland")
+hl.env("QT_QPA_PLATFORMTHEME"                ,"qt6ct")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION" ,"1")
+hl.env("XCURSOR_SIZE"                        ,"24")
+hl.env("HYPRCURSOR_THEME"                    ,"rose-pine-hyprcursor")
+hl.env("HYPRCURSOR_SIZE"                     ,"36")
+hl.env("GRIM_DEFAULT_DIR"                    ,"/home/rituraj/pictures/screenshots")
+hl.env("WLLOCK_MEDIA_FILE"                   ,"$HOME/.local/share/wllock/lockscreen.mp4")
+hl.env("GSK_RENDERER"                        ,"vulkan")
+hl.env("GTK_THEME"                           ,"Gruvbox-Dark")
 
 -- Permission Config
 hl.config({
@@ -92,8 +91,8 @@ hl.config({
 
 hl.config({
     general = {
-        gaps_in  = 4,
-        gaps_out = 8,
+        gaps_in  = 0,
+        gaps_out = 0,
         border_size = 1,
         col = {
             active_border   = "rgba(484848ff)",
@@ -105,7 +104,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 4,
+        rounding       = 0,
         rounding_power = 2,
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
@@ -126,7 +125,7 @@ hl.config({
     },
 
     animations = {
-        enabled = true,
+        enabled = false,
     },
 })
 

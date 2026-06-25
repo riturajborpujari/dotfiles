@@ -46,7 +46,7 @@ nmap gl                             gF
 nmap <silent><leader>t              :terminal<cr>
 nmap <silent><leader>c              :terminal<cr><C-W>N:only<cr>i
 nmap <leader>l                      :ls<cr>:b 
-nmap <silent><leader>e              :Ls<cr>
+nmap <silent><leader>e              :Ex<cr>
 nmap <silent><leader>we             :Explore .<cr>
 nmap <leader>ns                     :SessionSave 
 nmap <leader>nl                     :SessionLoad 
@@ -54,6 +54,8 @@ nmap <silent>]q                     :cn<cr>
 nmap <silent>[q                     :cp<cr>
 nmap <silent>]l                     :lne<cr>
 nmap <silent>[l                     :lp<cr>
+nmap <a-h>							<C-w>h
+nmap <a-l>							<C-w>l
 
 " group move lines
 vmap <C-p>                  :m '<-2<cr>gv=gv
