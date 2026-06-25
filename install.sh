@@ -1,7 +1,15 @@
 PWD=$(pwd)
 
+echo "Setting up '${HOME}/.local' directories"
+mkdir -p ~/.local/{bin,lib,share,shate,var}
+mkdir -p ~/.local/var/vim/{better-sessions,undo}
+mkdir -p ~/.local/var/dmk
+
 echo "Setting up Bash"
 ln -sf "${PWD}/.bashrc" ~/.bashrc
+
+echo "Setting up Fzf-Preview"
+install "${PWD}/fzf-preview" ~/.local/bin/
 
 echo "Setting up XDG Directories"
 ln -sf "${PWD}/.config/user-dirs.dirs" ~/.config/user-dirs.dirs
