@@ -36,8 +36,8 @@ hl.on("window.destroy", function ()
 end)
 
 hl.on("window.title", function (window)
-	-- TODO: Check if a Title change for a non-active window affects the 
-	--		 active window title being displayed
+	-- FIXME: If a Title change for a non-active window, it affects the 
+	--		  active window title being displayed
 	hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
 end)
 
@@ -62,23 +62,22 @@ hl.on("screenshare.state", function (active, type, name)
 end)
 
 -- Environment variables
-hl.env("XCURSOR_SIZE"                        ,"24")
-hl.env("HYPRCURSOR_SIZE"                     ,"24")
-hl.env("GDK_DPI_SCALE"                       ,"1.3333")
-hl.env("QT_SCALE_FACTOR"                     ,"1.3333")
-hl.env("XDG_CURRENT_DESKTOP"                 ,"Hyprland")
-hl.env("XDG_SESSION_TYPE"                    ,"wayland")
-hl.env("XDG_SESSION_DESKTOP"                 ,"Hyprland")
-hl.env("QT_QPA_PLATFORM"                     ,"wayland")
-hl.env("QT_QPA_PLATFORMTHEME"                ,"qt6ct")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION" ,"1")
-hl.env("XCURSOR_SIZE"                        ,"24")
-hl.env("HYPRCURSOR_THEME"                    ,"rose-pine-hyprcursor")
-hl.env("HYPRCURSOR_SIZE"                     ,"36")
-hl.env("GRIM_DEFAULT_DIR"                    ,"/home/rituraj/pictures/screenshots")
-hl.env("WLLOCK_MEDIA_FILE"                   ,"$HOME/.local/share/wllock/lockscreen.mp4")
-hl.env("GSK_RENDERER"                        ,"vulkan")
-hl.env("GTK_THEME"                           ,"Gruvbox-Dark")
+hl.env("XCURSOR_SIZE",                         "24")
+hl.env("HYPRCURSOR_SIZE",                      "24")
+hl.env("GDK_DPI_SCALE",                        "1.3333")
+hl.env("QT_SCALE_FACTOR",                      "1.3333")
+hl.env("XDG_CURRENT_DESKTOP",                  "Hyprland")
+hl.env("XDG_SESSION_TYPE",                     "wayland")
+hl.env("XDG_SESSION_DESKTOP",                  "Hyprland")
+hl.env("QT_QPA_PLATFORM",                      "wayland")
+hl.env("QT_QPA_PLATFORMTHEME",                 "qt6ct")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION",  "1")
+hl.env("XCURSOR_SIZE",                         "24")
+hl.env("HYPRCURSOR_THEME",                     "rose-pine-hyprcursor")
+hl.env("HYPRCURSOR_SIZE",                      "36")
+hl.env("GRIM_DEFAULT_DIR",                     os.getenv("HOME") .. "/Pictures/Screenshots")
+hl.env("GSK_RENDERER",                         "vulkan")
+hl.env("GTK_THEME",                            "Gruvbox-Dark")
 
 -- Permission Config
 hl.config({
@@ -186,29 +185,21 @@ hl.config({
 
 -- Input Config
 hl.config({
-    input = {
-        kb_layout	 = "us+rupeesign(4)+level3(ralt_switch),in(asm)",
-        kb_variant 	 = "",
-        kb_model   	 = "",
-        kb_options 	 = "grp:alt_caps_toggle",
-        kb_rules   	 = "",
-        follow_mouse = 0,
-        sensitivity  = 0,
-        touchpad     = {
-            natural_scroll = false,
-        },
-    },
-})
+	input = {
+		kb_layout     = "us+rupeesign(4)+level3(ralt_switch),in(asm)",
+		kb_variant    = "",
+		kb_model      = "",
+		kb_options    = "grp:alt_caps_toggle",
+		kb_rules      = "",
 
-hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
-})
+		follow_mouse  = 0,
+		sensitivity   = 0.0,
+		accel_profile = "flat",
 
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
+		touchpad      = {
+			natural_scroll = false,
+		},
+	},
 })
 
 -- Keybindings
@@ -220,8 +211,7 @@ hl.bind(mainMod .. " + Backspace",	hl.dsp.window.float(true))
 hl.bind(mainMod .. " + E",			hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + R", 			hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + S", 			hl.dsp.exec_cmd("sh -c slurp -d | wl-copy"))
-hl.bind(mainMod .. " + X", 			hl.dsp.exec_cmd("emacsclient --create-frame"))
-hl.bind(mainMod .. " + Space",		hl.dsp.exec_cmd("/home/rituraj/.config/hypr/superscript.sh"))
+hl.bind(mainMod .. " + Space",		hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/superscript.sh"))
 
 -- Widget Controls
 hl.bind(mainMod .. " + F9",  hl.dsp.exec_cmd(meStream))

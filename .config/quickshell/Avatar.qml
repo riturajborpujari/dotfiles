@@ -6,7 +6,7 @@ Item {
 	Image {
 		id: avatar
 		anchors.fill: parent
-		source: "file://" + Quickshell.env("HOME") + "/Pictures/avatar.jpg"
+		source: "file://" + Quickshell.env("HOME") + "/.config/quickshell/avatar.jpg"
 		fillMode: Image.PreserveAspectCrop
 		visible: false
 	}
