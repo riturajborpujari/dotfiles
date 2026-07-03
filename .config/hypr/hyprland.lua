@@ -7,17 +7,23 @@ hl.monitor({
 	cm		 = "srgb",
 })
 
-local terminal			= "kitty"
-local launcher    		= "tofi-drun --drun-launch true"
-local toggleAudioCtl	= "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
-local meStream			= "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
+local terminal		 = "kitty"
+local launcher    	 = "tofi-drun --drun-launch true"
+local toggleAudioCtl = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
+local meStream		 = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
+local startup_cmds   = {
+	"eww open bar",
+	"wlframe ~/Pictures/wallpaper.jpg",
+	"hypridle",
+	"systemctl --user restart xdg-desktop-portal-hyprland",
+	"systemctl --user start hyprland-session.target"
+}
 
 -- Event Handlers
 hl.on("hyprland.start", function ()
-	hl.exec_cmd("eww open-many bar paper")
-	hl.exec_cmd("hypridle")
-	hl.exec_cmd("systemctl --user start hyprland-session.target")
-	hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland")
+	for _, cmd in ipairs(startup_cmds) do
+		hl.exec_cmd(cmd)
+	end
 end)
 
 hl.on("window.active", function (window)
@@ -36,9 +42,9 @@ hl.on("window.destroy", function ()
 end)
 
 hl.on("window.title", function (window)
-	-- FIXME: If a Title change for a non-active window, it affects the 
-	--		  active window title being displayed
-	hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
+	if (window.active ~= nil) then
+		hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
+	end
 end)
 
 hl.on("workspace.active", function (workspace)
