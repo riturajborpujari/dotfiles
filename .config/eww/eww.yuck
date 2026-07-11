@@ -3,17 +3,6 @@
 (defpoll gpuUsage           :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
 (defpoll ramUsage			:interval "3s" "free --mebi | grep Mem | awk '{printf(\"%.2f%% [%d MiB]\", ($2-$4-$6) / $2 * 100, $2-$4-$6)}'")
 
-(defwindow paper
-	:monitor 0
-	:exclusive false
-	:stacking "bg"
-	:geometry (geometry :x "0" :y "0" :width "100%" :height "100%" :anchor "top center")
-	
-	(image
-		:path "/home/rituraj/.config/wallpaper.jpg"
-		:image-width "2560"
-		:image-height "1440"))
-
 (defwindow bar
 	:monitor 0
 	:exclusive true

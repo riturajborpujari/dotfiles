@@ -14,7 +14,7 @@ set background=dark
 
 hi SpecialKey guifg=#f5c04b
 hi Pmenu guibg=#444444 guifg=NONE cterm=NONE
-hi Visual guibg=#484848 guifg=NONE
+hi Visual guibg=#484848 guifg=NONE cterm=NONE
 hi PmenuThumb guibg=#f5c04b
 hi PmenuSel guibg=#f5c04b guifg=#181818 cterm=NONE
 hi PmenuSbar guibg=NONE ctermbg=NONE
@@ -31,7 +31,7 @@ hi! link Boolean String
 hi! link Float String
 
 hi Statement guifg=#efefef cterm=NONE
-"hi Statement guifg=#44aaff cterm=NONE
+"hi Statement guifg=#66bbff cterm=NONE
 hi! link Conditional Statement
 hi! link Repeat Statement
 hi! link Label Statement
@@ -44,7 +44,7 @@ hi! link Title Comment
 hi Identifier guifg=NONE ctermfg=NONE cterm=none
 hi Function guifg=#fdc04b ctermfg=NONE cterm=NONE gui=NONE
 hi Type guifg=#d0e0d0 gui=NONE cterm=NONE
-"hi Type guifg=#44aaff gui=NONE cterm=NONE
+"hi Type guifg=#66bbff gui=NONE cterm=NONE
 hi! link StorageClass Type
 hi! link Structure Type
 hi! link Typedef Type
@@ -66,7 +66,7 @@ hi! link TablineFill LineNrAbove
 hi! link TablineSel StatusLine
 hi! link StatusLineTermNC StatusLineNC
 hi! link StatusLineTerm StatusLine
-hi VertSplit guifg=#181818 guibg=#999999
+hi VertSplit guifg=#999999 guibg=NONE cterm=NONE
 hi Folded guibg=#303030 guifg=#999999
 hi CursorColumn guibg=NONE guifg=#e4e4e0  cterm=NONE
 
