@@ -21,6 +21,7 @@ ln -sf \
 	"${PWD}/.config/quickshell" \
 	"${PWD}/.config/tofi" \
 	"${PWD}/.config/kitty" \
+	"${PWD}/.config/foot" \
 	"${PWD}/.config/vim" \
 	"${PWD}/.config/zathura" \
 	"${PWD}/.config/user-dirs.dirs" \

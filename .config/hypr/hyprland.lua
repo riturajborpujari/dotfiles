@@ -7,7 +7,7 @@ hl.monitor({
 	cm		 = "srgb",
 })
 
-local terminal		 = "kitty"
+local terminal		 = "foot"
 local launcher    	 = "tofi-drun --drun-launch true"
 local toggleAudioCtl = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
 local meStream		 = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
@@ -105,7 +105,7 @@ hl.config({
         },
         resize_on_border = true,
         allow_tearing = false,
-        layout = "dwindle",
+        layout = "master",
     },
 
     decoration = {
@@ -248,8 +248,8 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
-hl.bind(mainMod .. " + CTRL + Return",			hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + CTRL + Return", 	hl.dsp.window.move({ workspace = "special:magic" }))
+--hl.bind(mainMod .. " + CTRL + Return",			hl.dsp.workspace.toggle_special("magic"))
+--hl.bind(mainMod .. " + SHIFT + CTRL + Return", 	hl.dsp.window.move({ workspace = "special:magic" }))
 hl.bind(mainMod .. " + tab",					hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + SHIFT + tab",			hl.dsp.focus({ workspace = "e-1" }))
 
