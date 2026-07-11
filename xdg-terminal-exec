@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# xdg-terminal-exec
+#
+# Terminal launcher used by GIO/gtk-launch for applications with
+# Terminal=true in their .desktop files.
+
+if [ "$#" -eq 0 ]; then
+    exec foot
+else
+    exec foot "$@"
+fi

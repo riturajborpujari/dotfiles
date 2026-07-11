@@ -7,7 +7,7 @@ hl.monitor({
 	cm		 = "srgb",
 })
 
-local terminal		 = "foot"
+local terminal		 = "xdg-terminal-exec"
 local launcher    	 = "tofi-drun --drun-launch true"
 local toggleAudioCtl = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
 local meStream		 = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
