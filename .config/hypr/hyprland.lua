@@ -52,19 +52,19 @@ hl.on("workspace.active", function (workspace)
 end)
 
 hl.on("screenshare.state", function (active, type, name)
-	if (active == true) then
-		hl.notification.create({
-			text = "screenshare Active: " .. ", " .. type .. ", " .. name,
-			timeout = 5000,
-			icon = "ok",
-		})
-	else 
-		hl.notification.create({
-			text = "screenshare End: " .. ", " .. type .. ", " .. name,
-			timeout = 5000,
-			icon = "ok",
-		})
-	end
+	--if (active == true) then
+	--	hl.notification.create({
+	--		text = "screenshare Active: " .. ", " .. type .. ", " .. name,
+	--		timeout = 5000,
+	--		icon = "ok",
+	--	})
+	--else 
+	--	hl.notification.create({
+	--		text = "screenshare End: " .. ", " .. type .. ", " .. name,
+	--		timeout = 5000,
+	--		icon = "ok",
+	--	})
+	--end
 end)
 
 -- Environment variables
