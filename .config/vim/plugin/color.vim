@@ -30,8 +30,9 @@ hi! link Number String
 hi! link Boolean String
 hi! link Float String
 
-hi Statement guifg=#efefef cterm=NONE
+"hi Statement guifg=#efefef cterm=NONE
 "hi Statement guifg=#66bbff cterm=NONE
+hi! link Statement Type
 hi! link Conditional Statement
 hi! link Repeat Statement
 hi! link Label Statement
