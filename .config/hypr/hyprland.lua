@@ -1,4 +1,12 @@
 hl.monitor({
+    output   = "",
+    mode     = "1920x1080@60",
+    position = "0x0",
+    scale    = 1,
+	mirror = "DP-1"
+})
+
+hl.monitor({
     output   = "DP-1",
     mode     = "2560x1440@144",
     position = "0x0",
@@ -7,48 +15,29 @@ hl.monitor({
 	cm		 = "srgb",
 })
 
-local terminal		 = "xdg-terminal-exec"
-local launcher    	 = "tofi-drun --drun-launch true"
-local toggleAudioCtl = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
-local meStream		 = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=450:x=420:y=150,hflip /dev/video0"
-local startup_cmds   = {
-	"eww open bar",
+local terminal		   = "xdg-terminal-exec"
+local launcher    	   = "tofi-drun --drun-launch true"
+local superscript      = os.getenv("HOME") .. "/.config/hypr/superscript.sh"
+local toggleAudioCtl   = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
+local meStream         = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=300:x=420:y=270,hflip /dev/video0"
+local screenshot       = 'grim "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
+local regionScreenshot = 'grim -g "$(slurp)" "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
+
+local startupCmds   = {
+	"eww open-many statusbar titlebar",
+	"sh ~/.config/hypr/hyprtracker.sh",
 	"wlframe ~/Pictures/wallpaper.jpg",
 	"hypridle",
-	"systemctl --user restart xdg-desktop-portal-hyprland",
-	"systemctl --user start hyprland-session.target"
 }
 
 -- Event Handlers
 hl.on("hyprland.start", function ()
-	for _, cmd in ipairs(startup_cmds) do
+	-- Indicate graphical session start
+	hl.exec_cmd("systemctl --user start hyprland-session.target")	
+
+	for _, cmd in ipairs(startupCmds) do
 		hl.exec_cmd(cmd)
 	end
-end)
-
-hl.on("window.active", function (window)
-	if (window.active ~= nil) then
-		hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
-	else
-		hl.exec_cmd("eww update 'activeWindow=Desktop'")
-	end
-end)
-
-hl.on("window.destroy", function ()
-	window = hl.get_active_window()
-	if (window == nil) then
-		hl.exec_cmd("eww update 'activeWindow=Desktop'")
-	end
-end)
-
-hl.on("window.title", function (window)
-	if (window.active ~= nil) then
-		hl.exec_cmd("eww update 'activeWindow=" .. window.title .. "'")
-	end
-end)
-
-hl.on("workspace.active", function (workspace)
-	hl.exec_cmd("eww update activeWorkspaceId=" .. workspace.name)
 end)
 
 hl.on("screenshare.state", function (active, type, name)
@@ -68,8 +57,6 @@ hl.on("screenshare.state", function (active, type, name)
 end)
 
 -- Environment variables
-hl.env("XCURSOR_SIZE",                         "24")
-hl.env("HYPRCURSOR_SIZE",                      "24")
 hl.env("GDK_DPI_SCALE",                        "1.3333")
 hl.env("QT_SCALE_FACTOR",                      "1.3333")
 hl.env("XDG_CURRENT_DESKTOP",                  "Hyprland")
@@ -78,39 +65,47 @@ hl.env("XDG_SESSION_DESKTOP",                  "Hyprland")
 hl.env("QT_QPA_PLATFORM",                      "wayland")
 hl.env("QT_QPA_PLATFORMTHEME",                 "qt6ct")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION",  "1")
-hl.env("XCURSOR_SIZE",                         "24")
-hl.env("HYPRCURSOR_THEME",                     "rose-pine-hyprcursor")
-hl.env("HYPRCURSOR_SIZE",                      "36")
+hl.env("XCURSOR_SIZE",                         "32")
+hl.env("XCURSOR_THEME",                        "Adwaita")
+hl.env("HYPRCURSOR_THEME",                     "Adwaita")
+hl.env("HYPRCURSOR_SIZE",                      "32")
 hl.env("GRIM_DEFAULT_DIR",                     os.getenv("HOME") .. "/Pictures/Screenshots")
 hl.env("GSK_RENDERER",                         "vulkan")
-hl.env("GTK_THEME",                            "Gruvbox-Dark")
 
--- Permission Config
-hl.config({
-  ecosystem = {
-    enforce_permissions = false,
-  },
-})
 --hl.permission(".*", "screencopy", "ask")
 --hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "ask")
-
 hl.config({
+	ecosystem = {
+		enforce_permissions = false,
+	},
+
     general = {
         gaps_in  = 0,
         gaps_out = 0,
         border_size = 1,
         col = {
-            active_border   = "rgba(484848ff)",
-            inactive_border = "rgba(282828ff)",
+            active_border   = "rgba(888888ff)",
+            inactive_border = "rgba(181818ff)",
         },
         resize_on_border = true,
         allow_tearing = false,
         layout = "master",
     },
+	master = {
+		mfact = 0.59,
+	},
+    dwindle = {
+        preserve_split = true,
+		force_split    = 2,
+    },
+
+	cursor = {
+		enable_hyprcursor = true,
+	},
 
     decoration = {
-        rounding       = 0,
-        rounding_power = 2,
+        rounding         = 0,
+        rounding_power   = 2,
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
 
@@ -120,7 +115,6 @@ hl.config({
             render_power = 3,
             color        = 0xee1a1a1a,
         },
-
         blur = {
             enabled   = false,
             size      = 5,
@@ -128,82 +122,49 @@ hl.config({
             vibrancy  = 0.1696,
         },
     },
-
     animations = {
         enabled = false,
     },
-})
 
-hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1}    } })
-hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
-hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
-hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
-hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
-
--- Layout Configs
--- Dwindle
-hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-		force_split    = 2,
-    },
-})
--- Master
-hl.config({
-    master = {
-		mfact = 0.59,
-    },
-})
--- Scrolling
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-    },
-})
-
--- Default Background
-hl.config({
-    misc = {
-        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
-		background_color		= 0x181818
-    },
-})
-
--- Input Config
-hl.config({
 	input = {
 		kb_layout     = "us+rupeesign(4)+level3(ralt_switch),in(asm)",
 		kb_variant    = "",
 		kb_model      = "",
 		kb_options    = "grp:alt_caps_toggle",
 		kb_rules      = "",
-
 		follow_mouse  = 0,
 		sensitivity   = 0.0,
-		accel_profile = "flat",
+		accel_profile = "flat", -- No pointer acceleration please
 
 		touchpad      = {
 			natural_scroll = false,
+		},
+	},
+
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo   = true,
+		background_color		= 0x181818,
+    },
+
+	group = {
+		auto_group               = true,
+		group_on_movetoworkspace = true,
+		col                      = {
+			border_active			= "#a0a0a0",
+		},
+		groupbar = {
+			font_family         = "Iosevka",
+			font_size           = 18,
+			height              = 22,
+			enabled             = true,
+			text_color          = "#efefef",
+			text_color_inactive = "#a0a0a0",
+			col                 = {
+				active				= "#a0a0a0",
+				inactive 			= "#484848",
+			},
 		},
 	},
 })
@@ -211,65 +172,97 @@ hl.config({
 -- Keybindings
 local mainMod = "SUPER"
 
+hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.exit())
 hl.bind(mainMod .. " + Return",		hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + X",			hl.dsp.exec_cmd("emacsclient --create-frame"))
 hl.bind(mainMod .. " + Q",			hl.dsp.window.close())
 hl.bind(mainMod .. " + Backspace",	hl.dsp.window.float(true))
 hl.bind(mainMod .. " + E",			hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + R", 			hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + S", 			hl.dsp.exec_cmd("sh -c slurp -d | wl-copy"))
-hl.bind(mainMod .. " + Space",		hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/superscript.sh"))
+hl.bind(mainMod .. " + Space",	    hl.dsp.exec_cmd(superscript))
+
+hl.bind(mainMod .. " + G",			hl.dsp.group.toggle())
+hl.bind("ALT + Tab",				hl.dsp.group.next())
 
 -- Widget Controls
 hl.bind(mainMod .. " + F9",  hl.dsp.exec_cmd(meStream))
 hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd(toggleAudioCtl))
 
 -- Window Controls
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle"}))
+hl.bind(mainMod .. " + F",
+		hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle"}))
+
+-- Focus Change
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
--- Focus
-hl.bind(mainMod .. " + ALT + h", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mainMod .. " + ALT + l", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + ALT + k", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + ALT + j", hl.dsp.window.move({ direction = "down" }))
--- Resize
-hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.resize({ x = -80, y = 0, relative = true }))
-hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.resize({ x = 80, y = 0, relative = true }))
-hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.resize({ x = 0, y = -80, relative = true }))
-hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.resize({ x = 0, y = 80, relative = true }))
+
+-- Position Change
+hl.bind(mainMod .. " + ALT + h",
+		hl.dsp.window.move({ direction = "left", group_aware = true }))
+hl.bind(mainMod .. " + ALT + l",
+		hl.dsp.window.move({ direction = "right", group_aware = true }))
+hl.bind(mainMod .. " + ALT + k",
+		hl.dsp.window.move({ direction = "up", group_aware = true }))
+hl.bind(mainMod .. " + ALT + j",
+		hl.dsp.window.move({ direction = "down", group_aware = true }))
+
+-- Size Change
+hl.bind(mainMod .. " + SHIFT + h",
+		hl.dsp.window.resize({ x = -80, y = 0, relative = true }))
+hl.bind(mainMod .. " + SHIFT + l",
+		hl.dsp.window.resize({ x = 80, y = 0, relative = true }))
+hl.bind(mainMod .. " + SHIFT + k",
+		hl.dsp.window.resize({ x = 0, y = -80, relative = true }))
+hl.bind(mainMod .. " + SHIFT + j",
+		hl.dsp.window.resize({ x = 0, y = 80, relative = true }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Workspace Controls
 for i = 1, 10 do
     local key = i % 10
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + " .. key,
+			hl.dsp.focus({ workspace = i}))
+    hl.bind(mainMod .. " + SHIFT + " .. key,
+			hl.dsp.window.move({ workspace = i }))
 end
+
 --hl.bind(mainMod .. " + CTRL + Return",			hl.dsp.workspace.toggle_special("magic"))
 --hl.bind(mainMod .. " + SHIFT + CTRL + Return", 	hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind(mainMod .. " + tab",					hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + SHIFT + tab",			hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + tab",
+		hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + SHIFT + tab",
+		hl.dsp.focus({ workspace = "e-1" }))
 
 -- Audio Controls
-hl.bind("XF86AudioRaiseVolume",			hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),	{ locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", 		hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),  	{ locked = true, repeating = true })
-hl.bind("ALT + XF86AudioRaiseVolume",	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"),	{ locked = true, repeating = true })
-hl.bind("ALT + XF86AudioLowerVolume", 	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"),	{ locked = true, repeating = true })
-hl.bind("XF86AudioMute",        		hl.dsp.exec_cmd("playerctl play-pause"),					   	{ locked = true, repeating = true })
-hl.bind(mainMod .. " + XF86AudioMute",  hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), 	{ locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume",
+		hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
+hl.bind("XF86AudioLowerVolume",
+		hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
+hl.bind("ALT + XF86AudioRaiseVolume",
+		hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"))
+hl.bind("ALT + XF86AudioLowerVolume",
+		hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("playerctl play-pause"))
+hl.bind(mainMod .. " + XF86AudioMute",
+		hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 
 -- Player Controls
-hl.bind("CTRL + XF86AudioRaiseVolume",			hl.dsp.exec_cmd("playerctl position 5+"),	{ locked = true, repeating = true })
-hl.bind("CTRL + XF86AudioLowerVolume", 			hl.dsp.exec_cmd("playerctl position 5-"),  	{ locked = true, repeating = true })
-hl.bind("CTRL + SHIFT + XF86AudioRaiseVolume",	hl.dsp.exec_cmd("playerctl position 10+"),	{ locked = true, repeating = true })
-hl.bind("CTRL + SHIFT + XF86AudioLowerVolume", 	hl.dsp.exec_cmd("playerctl position 10-"), 	{ locked = true, repeating = true })
+hl.bind("CTRL + XF86AudioRaiseVolume",
+		hl.dsp.exec_cmd("playerctl position 5+"))
+hl.bind("CTRL + XF86AudioLowerVolume",
+		hl.dsp.exec_cmd("playerctl position 5-"))
+hl.bind("CTRL + SHIFT + XF86AudioRaiseVolume",
+		hl.dsp.exec_cmd("playerctl position 10+"))
+hl.bind("CTRL + SHIFT + XF86AudioLowerVolume",
+		hl.dsp.exec_cmd("playerctl position 10-"))
 
 -- Screenshot Controls
-hl.bind(mainMod .. "+ P",			hl.dsp.exec_cmd('grim               "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'))
-hl.bind(mainMod .. "+ CTRL + P",	hl.dsp.exec_cmd('grim -g "$(slurp)" "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'))
+hl.bind(mainMod .. "+ P",        hl.dsp.exec_cmd(screenshot))
+hl.bind(mainMod .. "+ CTRL + P", hl.dsp.exec_cmd(regionScreenshot))
 
 -- Zooming
 local MAX_ZOOM = 7
@@ -342,7 +335,7 @@ hl.window_rule({
 
 hl.window_rule({
 	name = "emacs-fullscreen",
-	match = { class = "Emacs" },
+	match = { class = "emacs" },
 	fullscreen = true,
 })
 
