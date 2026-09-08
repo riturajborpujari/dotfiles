@@ -1,32 +1,40 @@
 * {
     all: unset;
     font-size: 20px;
-    font-family: 'Iosevka Light';
+    font-family: 'Iosevka';
 }
 
-.accent {
-  color: #f5806b;
+.statusbar, .titlebar {
+    color: #a6a6a6;
+    background-color: #202020;
 }
 
-.bar {
-    background-color: rgba(24, 24, 24, 0.6);//#181818ff;
-    color: #d0d0d0;
+.titlebar {
+  padding: 2px 6px;
 }
 
 .border-right {
     border-right: 1px solid #484848;
-    padding: 3px 8px;
+    padding: 3px 6px 3px 12px;
 }
 
 .shaded {
     padding: 0px 12px;
     background-color: #363636;
+    color: #d0d0d0;
+    font-weight: 500;
+}
+
+.shaded.active {
+    background-color: #44aaff;
+    color: #181818;
 }
 
 // For systray menu
 menu {
-    background-color: rgba(#303030, 1.0);
-    color: #a0a0a0;
+    background-color: #181818;
+    color: #d0d0d0;
+    border: 1px solid #484848;
 }
 
 menuitem {
@@ -34,6 +42,6 @@ menuitem {
 }
 
 menuitem:hover {
-    background-color: #d0d0d0;
-    color: #000;
+    background-color: #f5c04b;
+    color: #181818;
 }

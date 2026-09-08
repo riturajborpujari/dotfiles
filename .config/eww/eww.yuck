@@ -1,9 +1,30 @@
-(defvar  activeWindow		"")
-(defvar  activeWorkspaceId	"1")
-(defpoll gpuUsage           :interval "3s" "/opt/rocm/bin/rocm-smi | head -n9 | tail -n2 | head -n1 | awk '{print $16}'")
-(defpoll ramUsage			:interval "3s" "free --mebi | grep Mem | awk '{printf(\"%.2f%% [%d MiB]\", ($2-$4-$6) / $2 * 100, $2-$4-$6)}'")
+(defvar  activeWindowTitle	"")
+(defvar  activeWorkspace	"1")
+(defvar  workspaces         "[1]")
+(defpoll gpuUsage           :interval "2s" "cat /sys/class/drm/card1/device/gpu_busy_percent")
+(defpoll activeNetwork      :interval "2s" "networkctl status wlan0 --json=short | jq '{addr: .Addresses[] | select(.Family==2) | .Address | join(\".\"),ssid:.SSID}'")
+(defpoll gpuStats           :initial "{\"used\":0,\"total\":0,\"usage\":0}" :interval "2s" `echo "{\\"used\\":$(cat /sys/class/drm/card1/device/mem_info_vram_used),\\"total\\":$(cat /sys/class/drm/card1/device/mem_info_vram_total),\\"usage\\":$(cat /sys/class/drm/card1/device/gpu_busy_percent)}"`)
 
-(defwindow bar
+(defwindow titlebar
+	:monitor 0
+	:exclusive true
+	:stacking "fg"
+	:geometry (geometry :x 0 :y 0 :height 30 :width "100%" :anchor "top center")
+
+	(box
+		:orientation "h"
+		:space-evenly false
+
+		(label
+			:halign "start"
+			:hexpand true
+			:text {activeWindowTitle == "" ? "Desktop": activeWindowTitle})
+		(label
+			:halign "end"
+			:text {formattime(EWW_TIME, "%a, %d %b | %H:%M")})))
+
+
+(defwindow statusbar
 	:monitor 0
 	:exclusive true
 	:stacking "bottom"
@@ -11,38 +32,43 @@
 
 	(box
 		:orientation "h"
+		:halign "fill"
+		:hexpand true
+		:space-evenly false
 
 		(box
 			:orientation "h"
 			:space-evenly false
 			:halign "start"
-			:spacing 10
-			(label
-				:class "shaded accent"
-				:halign "start"
-				:text {activeWorkspaceId})
-			(label
-				:halign "start"
-				:text {activeWindow}))
+			(for w in workspaces
+				(label :class {w == activeWorkspace? "shaded active":"shaded"} :text {w})))
 
 		(box
 			:orientation "h"
-			:space-evenly false
 			:halign "end"
+			:hexpand true
+			:space-evenly false
+
 			(systray
 				:valign "center"
 				:orientation "h"
 				:spacing "10"
 				:icon-size 20)
+
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5806b'>RAM</span> ${ramUsage}")
+				:tooltip "Address: ${activeNetwork?.addr}"  
+			    :markup "<span color='#44aaff'>Net</span> ${activeNetwork?.ssid} [${formatbytes(round(EWW_NET.wlan0.NET_UP, 0),false,'si')}|${formatbytes(round(EWW_NET.wlan0.NET_DOWN,0), false, 'si')}]")
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5806b'>CPU</span> ${round(EWW_CPU.avg, 2)}% [${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C]")
+			    :markup "<span color='#44aaff'>Disk</span> ${round(EWW_DISK['/'].used_perc, 2)}% [${formatbytes(EWW_DISK['/'].used, false, 'si')}|${formatbytes(EWW_DISK['/'].total, false, 'si')}]")
 			(label
 			    :class "border-right"
-			    :markup "<span color='#f5806b'>GPU</span> ${gpuUsage} [${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C]")
+			    :markup "<span color='#44aaff'>Compute</span> ${round(EWW_CPU.avg, 2)}% [${formatbytes(round(EWW_RAM.used_mem,0), false, 'si')}|${formatbytes(round(EWW_RAM.total_mem,0), false, 'si')}]")
 			(label
-				:style "padding-left: 8px"
-				:markup "<span color='#f5806b'>${formattime(EWW_TIME, "%a, %d %b | %H:%M")} </span>"))))
+			    :class "border-right"
+			    :markup "<span color='#44aaff'>Graphics</span> ${gpuStats?.usage}% [${formatbytes(gpuStats.used, false, 'si')}|${formatbytes(gpuStats.total, false, 'si')}]")
+			(label
+			    :class "border-right"
+			    :markup "<span color='#44aaff'>Temps</span> CPU ${round(EWW_TEMPS.K10TEMP_TCTL,1)}°C | GPU ${round(EWW_TEMPS.AMDGPU_JUNCTION,1)}°C | SSD ${round(EWW_TEMPS.NVME_COMPOSITE_CT500P3SSD8_TEMP1,1)}°C")
+			)))
