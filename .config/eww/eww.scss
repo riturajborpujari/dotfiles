@@ -2,20 +2,25 @@
     all: unset;
     font-size: 20px;
     font-family: 'Iosevka';
-}
-
-.statusbar, .titlebar {
-    color: #a6a6a6;
-    background-color: #202020;
+    font-weight: 400;
 }
 
 .titlebar {
-  padding: 2px 6px;
+    color: #d0d0d0;
+    background-color: rgba(20, 20, 20, 0.65);//#202020;
+    border-radius: 4px;
+    border: 1px solid #484848;
+}
+
+.statusbar {
+    color: #d0d0d0;
+    background-color: rgba(20, 20, 20, 0.3);//#202020;
+    border: 1px solid #484848;
 }
 
 .border-right {
     border-right: 1px solid #484848;
-    padding: 3px 6px 3px 12px;
+    padding: 6px 12px;
 }
 
 .shaded {
@@ -23,6 +28,9 @@
     background-color: #363636;
     color: #d0d0d0;
     font-weight: 500;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 6px 12px;
 }
 
 .shaded.active {

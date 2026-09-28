@@ -1,10 +1,11 @@
+;;; -*- lexical-binding: t; -*-
 (require 'ox-publish)
 (add-to-list 'load-path "~/.emacs.d/lisp/org-publish-rss/")
 (require 'org-publish-rss)
 
 (defun rxrj-publish ()
   (interactive)
-  (rxrj-generate-subdir-index "~/docs/rxrj" "~/docs/rxrj/devlog" "^\\* Devlog\n")
+  (rxrj-generate-subdir-index "~/Writing/Projects/rxrj" "~/Writing/Projects/rxrj/devlog" "^\\* Devlog\n")
   (org-publish "rxrj" t))
 
 (defun rxrj-html-preamble (info)
@@ -69,9 +70,9 @@
 (setq org-publish-project-alist
   	  '(
         ("rxrj-devlog"
-         :base-directory "~/docs/rxrj/devlog"
+         :base-directory "~/Writing/Projects/rxrj/devlog"
          :base-extension "org"
-         :publishing-directory "~/docs/rxrj/public/devlog"
+         :publishing-directory "~/Writing/Projects/rxrj/public/devlog"
          :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4
@@ -92,9 +93,9 @@
 		 :completion-function org-publish-rss)
 
 		("rxrj-index"
-		 :base-directory "~/docs/rxrj"
+		 :base-directory "~/Writing/Projects/rxrj"
 		 :base-extension "org"
-		 :publishing-directory "~/docs/rxrj/public"
+		 :publishing-directory "~/Writing/Projects/rxrj/public"
 		 :include ("index.org")
 
 		 :html-head "<link rel=\"stylesheet\" href=\"/static/style.css\" />"
@@ -104,22 +105,22 @@
 		 :publishing-function org-html-publish-to-html)
 		
         ("rxrj-static"
-         :base-directory "~/docs/rxrj/static"
+         :base-directory "~/Writing/Projects/rxrj/static"
          :base-extension "css\\|\\|png\\|jpg\\|jpeg\\|gif"
-         :publishing-directory "~/docs/rxrj/public/static"
+         :publishing-directory "~/Writing/Projects/rxrj/public/static"
          :recursive t
          :publishing-function org-publish-attachment)
 
 		("rxrj-rss"
-         :base-directory "~/docs/rxrj/devlog"
+         :base-directory "~/Writing/Projects/rxrj/devlog"
 		 :base-extension "xml"
-         :publishing-directory "~/docs/rxrj/public"
+         :publishing-directory "~/Writing/Projects/rxrj/public"
          :include ("rss.xml")
          :publishing-function org-publish-attachment)
 		
         ("rxrj-cname"
-         :base-directory "~/docs/rxrj"
-         :publishing-directory "~/docs/rxrj/public"
+         :base-directory "~/Writing/Projects/rxrj"
+         :publishing-directory "~/Writing/Projects/rxrj/public"
 		 :exclude ".*"
          :include ("CNAME")
          :publishing-function org-publish-attachment)

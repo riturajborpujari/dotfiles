@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (custom-theme-set-faces
  'user
  
@@ -14,8 +15,8 @@
  '(region ((t (:background "#444444"))))
  '(mode-line ((t (:background "#242424" :foreground "#efefef" :box nil))))
  '(mode-line-inactive ((t (:background "#1c1c1c" :foreground "#777777" :box nil))))
- '(line-number ((t (:foreground "#444444"))))
- '(line-number-current-line ((t (:foreground "#e5c07b"))))
+ '(line-number ((t (:inherit default :foreground "#444444"))))
+ '(line-number-current-line ((t (:inherit default :foreground "#e5c07b"))))
  '(minibuffer-prompt ((t (:foreground "#fdc04b"))))
  '(org-verbatim ((t (:foreground "#f5c04b"))))
  '(org-code ((t (:foreground "#f5c04b"))))

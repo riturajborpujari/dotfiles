@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (defun fancy-splash-image-file ()
   "~/non-existent")
 (add-to-list 'default-frame-alist '(background-color . "#181818"))

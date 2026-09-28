@@ -19,7 +19,7 @@ local terminal		   = "xdg-terminal-exec"
 local launcher    	   = "tofi-drun --drun-launch true"
 local superscript      = os.getenv("HOME") .. "/.config/hypr/superscript.sh"
 local toggleAudioCtl   = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
-local meStream         = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=300:x=420:y=270,hflip /dev/video0"
+local meStream         = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=400:x=420:y=270 /dev/video0"
 local screenshot       = 'grim "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
 local regionScreenshot = 'grim -g "$(slurp)" "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
 
@@ -38,22 +38,6 @@ hl.on("hyprland.start", function ()
 	for _, cmd in ipairs(startupCmds) do
 		hl.exec_cmd(cmd)
 	end
-end)
-
-hl.on("screenshare.state", function (active, type, name)
-	--if (active == true) then
-	--	hl.notification.create({
-	--		text = "screenshare Active: " .. ", " .. type .. ", " .. name,
-	--		timeout = 5000,
-	--		icon = "ok",
-	--	})
-	--else 
-	--	hl.notification.create({
-	--		text = "screenshare End: " .. ", " .. type .. ", " .. name,
-	--		timeout = 5000,
-	--		icon = "ok",
-	--	})
-	--end
 end)
 
 -- Environment variables
@@ -80,12 +64,12 @@ hl.config({
 	},
 
     general = {
-        gaps_in  = 0,
-        gaps_out = 0,
+        gaps_in  = 5,
+        gaps_out = 10,
         border_size = 1,
         col = {
-            active_border   = "rgba(888888ff)",
-            inactive_border = "rgba(181818ff)",
+            active_border   = "rgba(666666ff)",
+            inactive_border = "rgba(363636ff)",
         },
         resize_on_border = true,
         allow_tearing = false,
@@ -104,10 +88,10 @@ hl.config({
 	},
 
     decoration = {
-        rounding         = 0,
-        rounding_power   = 2,
-        active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        rounding         = 4,
+        rounding_power   = 1,
+        active_opacity   = 0.96,
+        inactive_opacity = 0.9,
 
         shadow = {
             enabled      = false,
@@ -115,17 +99,17 @@ hl.config({
             render_power = 3,
             color        = 0xee1a1a1a,
         },
+
         blur = {
-            enabled   = false,
+            enabled   = true,
             size      = 5,
-            passes    = 1,
+            passes    = 3,
             vibrancy  = 0.1696,
         },
     },
     animations = {
         enabled = false,
     },
-
 
 	input = {
 		kb_layout     = "us+rupeesign(4)+level3(ralt_switch),in(asm)",
@@ -172,7 +156,8 @@ hl.config({
 -- Keybindings
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.exit())
+--hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.global("quickshell:lock"))
 hl.bind(mainMod .. " + Return",		hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + X",			hl.dsp.exec_cmd("emacsclient --create-frame"))
 hl.bind(mainMod .. " + Q",			hl.dsp.window.close())
@@ -329,7 +314,7 @@ hl.window_rule({
 	match = { class = "ffplay" },
 	float =	true,
 	pin   = true,
-	move  = "(monitor_w-window_w) (monitor_h-window_h - 40)",
+	move  = "(monitor_w-window_w) (monitor_h-window_h - 35)",
 	no_initial_focus = true,
 })
 

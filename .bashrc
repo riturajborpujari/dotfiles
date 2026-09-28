@@ -9,19 +9,13 @@ write_git_branch_colorized () {
   fi;
 
   if [[ $(git status -s 2> /dev/null) ]]; then
-    echo -e " [$branch]*"
+    echo -e " \e[91m[$branch]*"
   else
-    echo -e " [$branch]"
+    echo -e " \e[36m[$branch]"
   fi
 }
 
-export EDITOR=vim
-export PROMPT_DIRTRIM=0
-export PS1="[\u@\h](\j) \w\$(write_git_branch_colorized)\n$ "
-export FZF_DEFAULT_CMD="fd"
-export FZF_DEFAULT_OPTS="--preview='fzf-preview {}' --bind=ctrl-u:preview-up,ctrl-d:preview-down"
-export GOPATH="$HOME/.local/lib/go"
-export PATH="$HOME/.local/bin:$PATH"
+export PS1="[\u@\h] \e[97m\w\$(write_git_branch_colorized)\e[0m\n$ "
 
 alias top="top -u \${USER} -em"
 alias ls="ls -lh --color"
@@ -33,3 +27,4 @@ alias wlls="sudo iwctl station wlan0 get-networks"
 alias wlscan="sudo iwctl station wlan0 scan"
 alias wlconn="sudo iwctl station wlan0 connect \$1"
 alias tm="tmux new-session -A -s probe"
+alias title="printf \"\e]0;%s\a\" \$1"

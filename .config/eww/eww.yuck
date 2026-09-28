@@ -1,53 +1,37 @@
 (defvar  activeWindowTitle	"")
 (defvar  activeWorkspace	"1")
 (defvar  workspaces         "[1]")
-(defpoll gpuUsage           :interval "2s" "cat /sys/class/drm/card1/device/gpu_busy_percent")
 (defpoll activeNetwork      :interval "2s" "networkctl status wlan0 --json=short | jq '{addr: .Addresses[] | select(.Family==2) | .Address | join(\".\"),ssid:.SSID}'")
 (defpoll gpuStats           :initial "{\"used\":0,\"total\":0,\"usage\":0}" :interval "2s" `echo "{\\"used\\":$(cat /sys/class/drm/card1/device/mem_info_vram_used),\\"total\\":$(cat /sys/class/drm/card1/device/mem_info_vram_total),\\"usage\\":$(cat /sys/class/drm/card1/device/gpu_busy_percent)}"`)
+(defpoll bluetoothDevice    :initial "" :interval "2s" "bluetoothctl devices Connected | cut -d' ' -f3-")
 
 (defwindow titlebar
 	:monitor 0
 	:exclusive true
 	:stacking "fg"
-	:geometry (geometry :x 0 :y 0 :height 30 :width "100%" :anchor "top center")
+	:geometry (geometry :x 10 :y 10 :height 30 :width "2540" :anchor "top center")
 
 	(box
 		:orientation "h"
-		:space-evenly false
-
-		(label
-			:halign "start"
-			:hexpand true
-			:text {activeWindowTitle == "" ? "Desktop": activeWindowTitle})
-		(label
-			:halign "end"
-			:text {formattime(EWW_TIME, "%a, %d %b | %H:%M")})))
-
-
-(defwindow statusbar
-	:monitor 0
-	:exclusive true
-	:stacking "bottom"
-	:geometry (geometry :x "0" :y "0" :width "100%" :anchor "bottom center")
-
-	(box
-		:orientation "h"
-		:halign "fill"
-		:hexpand true
 		:space-evenly false
 
 		(box
 			:orientation "h"
 			:space-evenly false
 			:halign "start"
-			(for w in workspaces
-				(label :class {w == activeWorkspace? "shaded active":"shaded"} :text {w})))
+			:hexpand true
+			:spacing 8
+			(label :class "shaded active" :text {activeWorkspace})
+			(label
+				:halign "start"
+				:hexpand true
+				:text {activeWindowTitle == "" ? "Desktop": activeWindowTitle}))
 
 		(box
-			:orientation "h"
 			:halign "end"
-			:hexpand true
+			:orientation "h"
 			:space-evenly false
+			:spacing 8 
 
 			(systray
 				:valign "center"
@@ -56,9 +40,43 @@
 				:icon-size 20)
 
 			(label
+				:halign "end"
+				:style "padding-right: 8px"
+				:text {formattime(EWW_TIME, "%a, %d %b | %H:%M")}))))
+
+(defwindow statusbar
+	:monitor 0
+	:exclusive false
+	:stacking "bottom"
+	:geometry (geometry :x 10 :y 10 :width "2540" :anchor "bottom center")
+
+	(box
+		:orientation "h"
+		:halign "fill"
+		:hexpand true
+		:space-evenly false
+
+		;(box
+		;	:orientation "h"
+		;	:space-evenly false
+		;	:halign "start"
+		;	(for w in workspaces
+		;		(label :class {w == activeWorkspace? "shaded active":"shaded"} :text {w})))
+
+		(box
+			:orientation "h"
+			:halign "end"
+			:hexpand true
+			:space-evenly false
+
+			(label
 			    :class "border-right"
 				:tooltip "Address: ${activeNetwork?.addr}"  
 			    :markup "<span color='#44aaff'>Net</span> ${activeNetwork?.ssid} [${formatbytes(round(EWW_NET.wlan0.NET_UP, 0),false,'si')}|${formatbytes(round(EWW_NET.wlan0.NET_DOWN,0), false, 'si')}]")
+			(label
+			    :class "border-right"
+				:visible {bluetoothDevice!=""}
+			    :markup "<span color='#44aaff'>Radio</span> ${bluetoothDevice}")
 			(label
 			    :class "border-right"
 			    :markup "<span color='#44aaff'>Disk</span> ${round(EWW_DISK['/'].used_perc, 2)}% [${formatbytes(EWW_DISK['/'].used, false, 'si')}|${formatbytes(EWW_DISK['/'].total, false, 'si')}]")

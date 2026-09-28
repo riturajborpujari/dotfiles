@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -33,7 +34,7 @@
 
 (set-face-attribute 'default nil
 					:family "Iosevka"
-					:height 260
+					:height 190
 					:weight 'extralight
 					:width 'extra-condensed)
 
@@ -92,10 +93,6 @@
 (require 'rxrj)
 (require 'c3-mode)
 
-(add-hook 'python-mode-hook (lambda ()
-                              (require 'venv)
-                              (auto-revert-mode 0)
-                              (eldoc-mode 0)))
 (add-hook 'go-mode-hook (lambda ()
                           (setenv "GOPATH"
                                   (concat
