@@ -3,6 +3,7 @@ import Qt5Compat.GraphicalEffects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Hyprland
 
 ShellRoot {
 	LockContext {
@@ -10,14 +11,12 @@ ShellRoot {
 
 		onUnlocked: {
 			lock.locked = false;
-			Qt.quit()
 		}
 	}
 
 	WlSessionLock {
 		id: lock
 
-		locked: true // start locked
 		WlSessionLockSurface {
 			LockSurface {
 				anchors.fill: parent
@@ -26,10 +25,10 @@ ShellRoot {
 		}
 	}
 
-	IpcHandler {
-		target: "sessionLock"
+	GlobalShortcut {
+		appid: "quickshell"
+		name: "lock"
 
-		function lock(): void { lock.locked = true }
-		function unlock(): void { lock.locked = false }
+		onPressed: lock.locked = true
 	}
 }
