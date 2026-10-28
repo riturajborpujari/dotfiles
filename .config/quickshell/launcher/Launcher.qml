@@ -74,15 +74,15 @@ PanelWindow {
 			}
 		}
 		
-		color: "#dd000000"
+		color: shell.mode=="dark"?"#282828":"#efefef"
 		height: content.height + 64
 		width: content.width + 64
 		anchors.centerIn: parent
 		border {
 			width: 1
-			color: "#282828"
+			color: shell.mode=="dark"?"#282828":"#ffffff"
 		}
-		radius: 4
+		radius: shell.radius
 
 		Column {
 			id: content
@@ -103,13 +103,11 @@ PanelWindow {
 				font.pixelSize: 24
 				leftPadding: 12
 				placeholderText: "Search apps"
+				placeholderTextColor: shell.mode=="dark"?"#efefef":"#181818"
+				color: shell.mode=="dark"?"#efefef":"#181818"
 
 				background: Rectangle {
-					color: "#181818"
-					border {
-						width: 1
-						color: "#202020"
-					}
+					color: shell.mode=="dark"?"#363636":"#e0e0e0"
 				}
 			}
 
@@ -124,7 +122,7 @@ PanelWindow {
 					anchors.horizontalCenter: parent.horizontalCenter
 
 					spacing: 1
-					highlight: Rectangle { color: "#44aaff"; radius: 0 }
+					highlight: Rectangle { color: "#44aaff" }
 
 					model: ScriptModel {
 						values: {
@@ -147,8 +145,8 @@ PanelWindow {
 						required property var modelData
 						width: content.width
 						height: 50
-						color: "#06ffffff"
-						radius: 0
+						color: shell.mode=="dark"?"#06ffffff":"#06000000"
+						radius: shell.radius
 
 						Row {
 							anchors.fill: parent
@@ -165,7 +163,7 @@ PanelWindow {
 							Text {
 								anchors.verticalCenter: parent.verticalCenter
 								text: modelData.name
-								color: "white"
+								color: shell.mode=="dark"?"#efefef":"#181818"
 							}
 						}
 

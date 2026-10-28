@@ -88,10 +88,10 @@
 (require 'eglot)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'colorscheme)
-(require 'lsp)
+(require 'colors)
 (require 'rxrj)
-(require 'c3-mode)
+(require 'lsp)
+(my/set-theme 'dark)
 
 (add-hook 'go-mode-hook (lambda ()
                           (setenv "GOPATH"

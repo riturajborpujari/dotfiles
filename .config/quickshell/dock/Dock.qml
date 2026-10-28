@@ -28,9 +28,9 @@ PanelWindow {
 	property var apps: DesktopEntries.applications.values
 		.filter(app => pinnedApps.includes(app.id))
 		.sort((a, b) => pinnedApps.indexOf(a.id) - pinnedApps.indexOf(b.id))
+	property bool isActive: false
 	
 	function launchEntry(entry) {
-		console.log("ActiveTopLevel:", Hyprland.activeTopLevel)
 		if (entry.runInTerminal) {
 			Quickshell.execDetached(["xdg-terminal-exec", entry.execString]);
 		} else {
@@ -47,21 +47,48 @@ PanelWindow {
 
 	MouseArea {
 		id: mouseArea
-		anchors.fill: parent
+		anchors.bottom: parent.bottom
+		anchors.horizontalCenter: parent.horizontalCenter
+		height: iconSize + margin * 2
+		width: (apps.length + 1) * iconSize + margin
 		hoverEnabled: true
 
+		onContainsMouseChanged: {
+			if (isActive && !this.containsMouse) {
+				isActive = false
+			}
+		}
+
+		MouseArea {
+			id: bottomArea
+			anchors.bottom: parent.bottom
+			anchors.horizontalCenter: parent.horizontalCenter
+			width: (apps.length + 1) * iconSize + margin
+			height: 8
+			hoverEnabled: true
+
+			onContainsMouseChanged: {
+				if (!isActive && this.containsMouse) {
+					isActive = true
+				}
+			}
+		}
+
 		Rectangle {
+			id:  main
 			anchors.bottom: parent.bottom
 			anchors.horizontalCenter: parent.horizontalCenter
 			anchors.margins: margin
 			height: iconSize + margin
 			width: (apps.length + 1) * iconSize + margin
-			color: "#66000000"
-			radius: 4
+			color: shell.mode=="dark"?"#66000000":"#66ffffff"
+			radius: shell.radius
 
 			// Slide up when mouse enters bottom-area or workspace is empty
-			property bool emptyWorkspace: Hyprland.focusedWorkspace?.toplevels.values.length == 0
-			property bool showDock: (mouseArea.containsMouse || emptyWorkspace);
+			property bool emptyWorkspace:
+			Hyprland.focusedWorkspace?.toplevels.values.length == 0
+			property bool showDock: isActive || emptyWorkspace;
+		
 			anchors.bottomMargin: showDock? margin:-height
 			Behavior on anchors.bottomMargin {
 				NumberAnimation {
@@ -85,13 +112,12 @@ PanelWindow {
 						anchors.fill: parent
 						flat: true
 						background: IconImage {
-							source: Qt.resolvedUrl("open_app_drawer_button.svg")
+							source: Quickshell.iconPath("kdenlive-menu")//Qt.resolvedUrl("open_app_drawer_button.svg")
 							implicitSize: iconSize - margin * 1.5
 							anchors.centerIn: parent
 						}
 
 						onClicked: {
-							console.log("Starting Launcher")
 							Quickshell.execDetached(["hyprctl", "dispatch", 'hl.dsp.global("quickshell:launcher")'])
 						}
 					}

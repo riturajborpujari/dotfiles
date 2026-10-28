@@ -9,9 +9,11 @@ RowLayout {
 	Rectangle {
 		Layout.fillHeight: true
 		implicitWidth: 30
-		color: "#10dddddd"
-		border.width: 1
-		border.color: "#303030"
+		color: shell.mode=="dark"?"#282828":"#efefef"
+		border.width: 0
+		border.color: shell.mode == "dark"?"#303030":"#efefef"
+		topLeftRadius: shell.radius
+		bottomLeftRadius: shell.radius
 
 		Text {
 			anchors.centerIn: parent
@@ -21,7 +23,7 @@ RowLayout {
 				family: root.fontFamily
 				pixelSize: root.fontSize
 			}
-			color: "#44aaff"
+			color: shell.mode=="dark"?"#efefef":"#181818"
 		}
 	}
 
@@ -55,7 +57,7 @@ RowLayout {
 				weight: 400
 				pixelSize: root.fontSize
 			}
-			color: "#d0d0d0"
+			color: shell.mode=="dark"?"#efefef":"#181818"
 		}
 	}
 }

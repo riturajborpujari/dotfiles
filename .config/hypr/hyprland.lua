@@ -15,19 +15,24 @@ hl.monitor({
 	cm		 = "srgb",
 })
 
-local terminal		   = "xdg-terminal-exec"
+local terminal		   = "footclient"
+local file_manager      = "thunar"
+local emacs_frame       = "emacsclient --create-frame"
 local launcher    	   = "tofi-drun --drun-launch true"
 local superscript      = os.getenv("HOME") .. "/.config/hypr/superscript.sh"
-local toggleAudioCtl   = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
-local meStream         = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=400:x=420:y=270 /dev/video0"
+local toggle_volume_control   = "pidof pavucontrol && kill -2 $(pidof pavucontrol) || pavucontrol"
+local me_stream         = "ffplay -max_delay 0 -analyzeduration 0 -fflags +nobuffer -flags +low_delay -video_size 1080x720 -vf crop=w=500:h=400:x=420:y=270 /dev/video0"
 local screenshot       = 'grim "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
 local regionScreenshot = 'grim -g "$(slurp)" "${GRIM_DEFAULT_DIR}/$(date \'+%d%b_%Hh%Mm%Ss.png\')"'
 
 local startupCmds   = {
-	"eww open-many statusbar titlebar",
-	"sh ~/.config/hypr/hyprtracker.sh",
-	"wlframe ~/Pictures/wallpaper.jpg",
+	--"eww open-many statusbar titlebar",
+	--"sh ~/.config/hypr/hyprtracker.sh",
+	--"wlframe ~/Pictures/wallpaper.jpg",
+	"quickshell -d",
 	"hypridle",
+	"emacs --daemon",
+	"foot --server",
 }
 
 -- Event Handlers
@@ -56,16 +61,14 @@ hl.env("HYPRCURSOR_SIZE",                      "32")
 hl.env("GRIM_DEFAULT_DIR",                     os.getenv("HOME") .. "/Pictures/Screenshots")
 hl.env("GSK_RENDERER",                         "vulkan")
 
---hl.permission(".*", "screencopy", "ask")
---hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "ask")
 hl.config({
 	ecosystem = {
 		enforce_permissions = false,
 	},
 
     general = {
-        gaps_in  = 5,
-        gaps_out = 10,
+        gaps_in  = 4,
+        gaps_out = 8,
         border_size = 1,
         col = {
             active_border   = "rgba(666666ff)",
@@ -77,11 +80,8 @@ hl.config({
     },
 	master = {
 		mfact = 0.59,
+		new_status = "master"
 	},
-    dwindle = {
-        preserve_split = true,
-		force_split    = 2,
-    },
 
 	cursor = {
 		enable_hyprcursor = true,
@@ -90,8 +90,8 @@ hl.config({
     decoration = {
         rounding         = 4,
         rounding_power   = 1,
-        active_opacity   = 0.96,
-        inactive_opacity = 0.9,
+        active_opacity   = 0.97,
+        inactive_opacity = 0.90,
 
         shadow = {
             enabled      = false,
@@ -103,7 +103,7 @@ hl.config({
         blur = {
             enabled   = true,
             size      = 5,
-            passes    = 3,
+            passes    = 2,
             vibrancy  = 0.1696,
         },
     },
@@ -156,23 +156,24 @@ hl.config({
 -- Keybindings
 local mainMod = "SUPER"
 
---hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.exit())
-hl.bind(mainMod .. " + SHIFT + Q",	hl.dsp.global("quickshell:lock"))
+hl.bind(mainMod .. " + Escape",	    hl.dsp.global("quickshell:lock"))
+hl.bind(mainMod .. " + Space",	    hl.dsp.global("quickshell:launcher"))
 hl.bind(mainMod .. " + Return",		hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + X",			hl.dsp.exec_cmd("emacsclient --create-frame"))
+hl.bind(mainMod .. " + B",          hl.dsp.exec_cmd(file_manager))
+hl.bind(mainMod .. " + X",			hl.dsp.exec_cmd(emacs_frame))
 hl.bind(mainMod .. " + Q",			hl.dsp.window.close())
 hl.bind(mainMod .. " + Backspace",	hl.dsp.window.float(true))
 hl.bind(mainMod .. " + E",			hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + R", 			hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + S", 			hl.dsp.exec_cmd("sh -c slurp -d | wl-copy"))
-hl.bind(mainMod .. " + Space",	    hl.dsp.exec_cmd(superscript))
+hl.bind(mainMod .. " + D",	        hl.dsp.exec_cmd(superscript))
 
 hl.bind(mainMod .. " + G",			hl.dsp.group.toggle())
 hl.bind("ALT + Tab",				hl.dsp.group.next())
 
 -- Widget Controls
-hl.bind(mainMod .. " + F9",  hl.dsp.exec_cmd(meStream))
-hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd(toggleAudioCtl))
+hl.bind(mainMod .. " + F9",  hl.dsp.exec_cmd(me_stream))
+hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd(toggle_volume_control))
 
 -- Window Controls
 hl.bind(mainMod .. " + F",
@@ -275,6 +276,24 @@ hl.bind("SUPER + minus", function()
     zoom(-0.5)
 end)
 
+-- ColorScheme switcher
+color_scheme = 'prefer-dark'
+function switch_color_scheme()
+	if color_scheme == 'prefer-dark' then
+		color_scheme = 'prefer-light'
+		hl.exec_cmd("pkill -USR2 -x foot")
+		hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "' .. color_scheme .. '"')
+		hl.exec_cmd("emacsclient --eval \"(my/set-theme 'light)\"")
+		hl.dispatch(hl.dsp.global("quickshell:color-light"))
+	else
+		color_scheme = 'prefer-dark'
+		hl.exec_cmd("pkill -USR1 -x foot")
+		hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "' .. color_scheme .. '"')
+		hl.exec_cmd("emacsclient --eval \"(my/set-theme 'dark)\"")
+		hl.dispatch(hl.dsp.global("quickshell:color-dark"))
+	end
+end
+
 -- Window Rules
 hl.window_rule({
     name  = "suppress-maximize-events",
@@ -316,12 +335,6 @@ hl.window_rule({
 	pin   = true,
 	move  = "(monitor_w-window_w) (monitor_h-window_h - 35)",
 	no_initial_focus = true,
-})
-
-hl.window_rule({
-	name = "emacs-fullscreen",
-	match = { class = "emacs" },
-	fullscreen = true,
 })
 
 hl.window_rule({

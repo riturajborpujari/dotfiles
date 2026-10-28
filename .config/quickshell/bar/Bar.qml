@@ -16,8 +16,6 @@ Scope {
 	property string fontFamily: "Iosevka Light"
 	property real margin: 8
 
-	property BluetoothAdapter adapterDefault: Bluetooth.defaultAdapter
-
 	PanelWindow {
 		anchors {
 			top: true
@@ -34,10 +32,10 @@ Scope {
 		color: "transparent"
 
 		Rectangle {
-			radius: 4
+			radius: shell.radius
 			anchors.fill: parent
 			height: parent.height
-			color: "#dd000000"
+			color: (shell.mode=="dark")?"#dd000000":"#aaffffff"
 
 			RowLayout {
 				anchors.fill: parent

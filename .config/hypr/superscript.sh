@@ -1,4 +1,4 @@
-command=$(echo -e "Applications\nBluetooth\nKill\nCalculate\nKeyboard layout\nLock\nSleep\nSignout\nHibernate\nPoweroff" | tofi)
+command=$(echo -e "Applications\nBluetooth\nKill\nCalculate\nKeyboard layout\nLock\nSleep\nSignout\nHibernate\nPoweroff\nToggle Appearance" | tofi)
 
 case $command in
     Applications)
@@ -44,4 +44,7 @@ case $command in
 				;;
 		esac
 		;;
+	'Toggle Appearance')
+		hyprctl eval 'switch_color_scheme()'
+	   ;;
 esac

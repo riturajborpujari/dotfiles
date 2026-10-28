@@ -16,9 +16,11 @@ PanelWindow {
 	WlrLayershell.exclusionMode: ExclusionMode.Ignore
 	WlrLayershell.namespace: "wallpaper"
 
+	property string imgPath: shell.mode == "dark"?"wallpaper-dark.jpg":"wallpaper-light.jpg"
+
 	Image {
 		anchors.fill: parent
 		fillMode: Image.PreserveAspectCrop
-		source: "file://" + Quickshell.env("HOME") + "/Pictures/wallpaper.jpg"
+		source: "file://" + Quickshell.env("HOME") + "/Pictures/" + imgPath
 	}
 }

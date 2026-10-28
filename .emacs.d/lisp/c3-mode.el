@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (require 'subr-x)
 
 (defvar c3-mode-syntax-table

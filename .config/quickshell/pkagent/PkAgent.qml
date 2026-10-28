@@ -2,18 +2,34 @@ import Quickshell
 import Quickshell.Services.Polkit
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Scope {
+	property real margin: 8
+	property string agentMsg: ""
+	property string agentMsgColor: "#d0d0d0"
+
+	function setAgentMsg(msg: string, color: string) {
+		agentMsg = msg
+		agentMsgColor = color
+	}
+	
 	PolkitAgent {
 		id: agent
+
+		onIsActiveChanged: {
+			if (agent.isActive) {
+				setAgentMsg(agent.flow?.message?? "Please proceed", "#d0d0d0")
+			}
+		}
 
 		onFlowChanged: {
 			if (agent.flow) {
 				agent.flow.authenticationFailed.connect(function() {
-					polkitError.visible = true;
 					passwordField.enabled = true;
 					passwordField.clear();
 					passwordField.forceActiveFocus();
+					setAgentMsg("Authentication Failed", "red")					
 				})
 
 				agent.flow.authenticationSucceeded.connect(function() {
@@ -21,6 +37,8 @@ Scope {
 					passwordField.clear();
 					passwordField.forceActiveFocus();
 				})
+
+				passwordField.textChanged.connect(() => setAgentMsg(agent.flow.message, "#d0d0d0"));
 			}
 		}
 	}
@@ -29,140 +47,152 @@ Scope {
 		id: pkAgentWindow
 		anchors {
 			top: true
-			left: true
-			right: true
 		}
-		color: "transparent"
-		implicitWidth: container.width + 40
-		implicitHeight: container.height + 85
+		implicitWidth: 540
+		implicitHeight: container.height + margin * 4
 
-		focusable: true
 		visible: agent.isActive
+		focusable: true
 		aboveWindows: true
 		exclusionMode: ExclusionMode.Ignore
+		color: "transparent"
 
 		Rectangle {
-			id: container
-			color: "#dd000000"
+			anchors.fill: parent
+			anchors.margins: margin
 			border {
 				color: "#303030"
 				width: 1
 			}
-			radius: 4
-			anchors.centerIn: parent
+			color: "#dd000000"
+			radius: shell.radius
 
-			width: content.width + 80
-			height: content.height + 64
-
-			Column {
-				id: content
-				anchors.centerIn: parent
-				width: 400
-				spacing: 20
+			ColumnLayout {
+				id: container
+				anchors.top: parent.top
+				anchors.left: parent.left
+				anchors.right: parent.right
+				anchors.margins: margin
+				spacing: margin * 2
 				
 				Text {
-					color: "#efefef"
-					text: agent.flow?.message?? "Authentication Required. Please enter your Password"
+					Layout.fillWidth: true
+					Layout.rightMargin: margin
+					Layout.leftMargin: margin
+					Layout.topMargin: margin
+
 					horizontalAlignment: Text.AlignHCenter
-					wrapMode: Text.WordWrap
-					width: parent.width - 10
-					anchors.horizontalCenter: parent.horizontalCenter
-					font.pixelSize: 20
+					text: "Authentication Required"
+					color: "#44aaff"
+
+					font.weight: 800
+					font.pointSize: 18
 				}
 
 				Text {
-					id: polkitError
-					visible: false
-					color: "#ff4455"
-					text: "Authentication Failed"
-					anchors.horizontalCenter: parent.horizontalCenter
+					Layout.fillWidth: true
+					Layout.rightMargin: margin
+					Layout.leftMargin: margin
+
+					horizontalAlignment: Text.AlignHCenter
+					text: agentMsg
+					color: agentMsgColor
+					wrapMode: Text.WordWrap
 				}
 
 				TextField {
 					id: passwordField
-					echoMode: TextField.Password
-					height: 40
+					Layout.fillWidth: true
+					Layout.rightMargin: margin * 2
+					Layout.leftMargin: margin * 2
+
 					focus: true
+					echoMode: TextField.Password
 					inputMethodHints: Qt.ImhSensitiveData | Qt.ImhHiddenText | Qt.ImhNoPredictiveText
 
-					horizontalAlignment: Text.AlignHCenter
-					width: parent.width
-					color: {
-						if (this.enabled) {
-							return "#44aaff";
-						} else {
-							return "#666666";
-						}
-					}
 					background: Rectangle {
-						color: {
-							if (passwordField.enabled) {
-								return "#363636";
-							} else {
-								return "#444444";
-							}
-						}
-						radius: 4
+						color: "#20ffffff"
+						radius: shell.radius
 					}
+					font.pointSize: 12
+					leftPadding: margin
+					topPadding: margin
+					bottomPadding: margin
+					placeholderText: "Password Please..."
+
+					color: enabled? "#d0d0d0":"#404040"
 
 					Keys.onPressed: (event) => {
 						if (event.key === Qt.Key_Escape) {
-							cancelButton.clicked();
-							event.accepted = true;
-						} else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-							submitButton.clicked();
+							onCancel();
 							event.accepted = true;
 						}
 					}
-
-					onTextChanged: {
-						if (this.text.length > 0) {
-							polkitError.visible = false
-						}
-					}
+					onAccepted: onSubmit();
 				}
 
-				Row {
-					anchors.right: parent.right
-					spacing: 10
+				
+				Rectangle {
+					Layout.fillWidth: true
+					Layout.rightMargin: margin
+					Layout.leftMargin: margin
+					Layout.bottomMargin: margin
 
-					Button {
-						id: cancelButton
-						flat: true
-						contentItem: Text {
-							text: "Cancel"
-							color: "#444444"
-							horizontalAlignment: Text.AlignHCenter
-						}
+					height: childrenRect.height
+					color: "transparent"
 
-						onClicked: {
-							if (agent.flow) {
-								agent.flow.cancelAuthenticationRequest()
+					RowLayout {
+						anchors.right: parent.right
+						spacing: margin
+						
+						Button {
+							id: btnCance
+							Layout.alignment: Qt.AlignRight
+							
+							flat: true
+							contentItem: Text {
+								text: "Cancel"
+								color: parent.hovered?"#44aaff":"#888888"
+								horizontalAlignment: Text.AlignHCenter
+								font.pointSize: 12
 							}
-						}
-					}
+							background: Rectangle { color: "transparent" }
 
-					Button {
-						id: submitButton
-						background: Rectangle {
-							color: "#44aaff"
-							radius: 4
-						}
-						contentItem: Text {
-							horizontalAlignment: Text.AlignHCenter
-							text: "Submit"
-							color: "#101010"
+							onClicked: onCancel()
 						}
 
-						onClicked: {
-							if (agent.flow) {
-								passwordField.enabled = false
-								agent.flow.submit(passwordField.text)
+						Button {
+							id: btnSubmit
+							Layout.alignment: Qt.AlignRight
+							background: Rectangle {
+								color: "#44aaff"
+								radius: shell.radius
 							}
+							contentItem: Text {
+								text: "Submit"
+								horizontalAlignment: Text.AlignHCenter
+								color: "#181818"
+								font.pointSize: 12
+							}
+
+							onClicked: onSubmit();
 						}
 					}
 				}
 			}
+		}
+	}
+
+	function onCancel() {
+		passwordField.clear();
+		if (agent.flow) {
+			agent.flow.cancelAuthenticationRequest();
+		}
+	}
+
+	function onSubmit() {
+		if (agent.flow) {
+			agent.flow.submit(passwordField.text)
 		}
 	}
 }

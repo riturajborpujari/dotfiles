@@ -4,8 +4,8 @@ Rectangle {
 	property string time
 
 	width: timetext.width + 20
-	topRightRadius: 4
-	bottomRightRadius: 4
+	topRightRadius: shell.radius
+	bottomRightRadius: shell.radius
 	color: "#44aaff"
 
 	Text {
